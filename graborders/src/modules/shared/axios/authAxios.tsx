@@ -4,7 +4,7 @@ import authToken from "src/modules/auth/authToken";
 const authAxios = axios.create({
 
   // Local link
-  baseURL: "http://162.0.223.247:8080/api",
+  baseURL: "https://thehighlandscinemas.com/api",
 
 });
 
