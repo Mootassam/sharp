@@ -9,7 +9,7 @@ import Error405 from "../../errors/Error405";
 import Dates from "../utils/Dates";
 import Product from "../models/product";
 import UserRepository from "./userRepository";
-import product from "../models/product";
+import User from "../models/user";
 
 class RecordRepository {
   static async create(data, options: IRepositoryOptions) {
@@ -20,6 +20,11 @@ class RecordRepository {
     await this.checkOrder(options);
 
     await this.calculeGrap(data, options);
+
+    await User(options.database).updateOne(
+      { _id: currentUser.id }, 
+      { $set: { tasksDone: currentUser.tasksDone + 1 } }
+    );
 
     const [record] = await Records(options.database).create(
       [
@@ -60,11 +65,11 @@ class RecordRepository {
     let total;
     let frozen;
 
-    if (currentUser && currentUser.product && currentUser.product.id && Orderdone === mergeDataPosition) {
+    if (currentUser && currentUser.product && currentUser.product.id && currentUser.tasksDone === mergeDataPosition) {
       // Subtract total amount including commission from current user's balance
       total =
         parseFloat(currentUserBalance) -
-        this.calculeTotalMerge(productBalance, currentCommission);
+        parseFloat(productBalance);
         frozen = parseFloat(currentUserBalance)
     } else {
       // Add total amount including commission to current user's balance
@@ -142,6 +147,7 @@ class RecordRepository {
     return data;
   }
 
+  "This is your limit. Please contact customer support for more tasks."
 
 
   static async checkOrder(options) {
@@ -159,9 +165,9 @@ class RecordRepository {
     const dailyOrder = currentUser.vip.dailyorder;
 
     if (currentUser && currentUser.vip && currentUser.vip.id) {
-      if (record >= dailyOrder) {
+      if (currentUser.tasksDone >= dailyOrder) {
         throw new Error405(
-          "This is your limit. Please contact customer support for more tasks."
+          "This is your limit. Please come back tomorrow to perform more tasks."
         );
       }
 

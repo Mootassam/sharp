@@ -72,7 +72,8 @@ export default class UserRepository {
     score,
     grab,
     withdraw,
-    freezeblance
+    freezeblance,
+    tasksDone
   ) {
     const user = await MongooseRepository.wrapWithSessionIfExists(
       User(options.database).findById(id),
@@ -100,6 +101,7 @@ export default class UserRepository {
           grab: grab,
           withdraw: withdraw,
           freezeblance:freezeblance,
+          tasksDone:tasksDone,
           $tenant: { status },
         },
       },

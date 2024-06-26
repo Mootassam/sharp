@@ -48,9 +48,10 @@ const Grappage = () => {
     try {
       // Await each action to ensure they complete in order
       await dispatch(recordListAction.doFetch());
-      await dispatch(authActions.doRefreshCurrentUser());
       await dispatch(actions.doFetch());
+      await dispatch(authActions.doRefreshCurrentUser());
       await dispatch(recordListAction.doCountDay());
+
     } catch (error) {
       console.error("Error during refreshing items:", error);
       // Optionally handle error state or show an error message to the user
@@ -112,7 +113,7 @@ const Grappage = () => {
       user: currentUser.id,
       rating: rating,
     };
-    dispatch(recordActions.doCreate(values));
+    await dispatch(recordActions.doCreate(values));
     await refreshItems();
     setShowModal(false);
   };
@@ -142,13 +143,10 @@ const Grappage = () => {
             disabled={lodingRoll}
             className={`button__grapstart ${lodingRoll ? "__disabled" : ""}`}
             onClick={() => rollAll()}
-
-         
           >
             Start
           </button>
           <Link to={"/order"} className="butoon__order remove__lg">
-            {" "}
             Orders
           </Link>
         </div>
@@ -168,7 +166,7 @@ const Grappage = () => {
               ${currentUser?.balance.toFixed(2)}
             </div>
             <div className="grap__">
-              {selectCountRecord}/{record?.vip?.dailyorder}
+              {currentUser?.tasksDone}/{record?.vip?.dailyorder}
             </div>
           </div>
 
@@ -176,7 +174,7 @@ const Grappage = () => {
             <div className="cadre__filma">
               <span className="av__balance">Today's earnings: </span>
               <label htmlFor="" className="balance__film">
-                ${totalperday.toFixed(3)}
+                ${totalperday?.toFixed(3)}
               </label>
             </div>
             <div className="cadre__filma">
@@ -252,7 +250,6 @@ const Grappage = () => {
                     {" "}
                     <Rating
                       onClick={handleRating}
-                      
                       size={20}
                       /* Available Props */
                     />

@@ -100,6 +100,7 @@ function UserEditForm(props) {
       grab: record.grab,
       withdraw: record.withdraw,
       freezeblance : record.freezeblance,
+      tasksDone:record.tasksDone,       
     };
   });
 
@@ -243,6 +244,16 @@ function UserEditForm(props) {
               />
             </Col>
           </Row>
+          
+          <Row>
+            <Col sm={4}>
+              <InputNumberFormItem
+                name="tasksDone"
+                label={i18n('user.fields.tasksDone')}
+              />
+            </Col>
+          </Row>
+
 
           
           <Row>

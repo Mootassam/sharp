@@ -2626,6 +2626,7 @@ const en = {
       currentrecord:"Tasks Done",
       freezeblance:"Freeze Balance",
       id: 'Id',
+      tasksDone : 'tasksDone',
       avatars: 'Avatar',
       email: 'Email',
       username : 'Username',

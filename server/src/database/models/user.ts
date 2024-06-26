@@ -45,6 +45,11 @@ export default (database) => {
         type: Boolean,
         default: false,
       },
+      tasksDone : { 
+        type: Number,
+        default:0
+      },
+
 
       balance: {
         type: Number,

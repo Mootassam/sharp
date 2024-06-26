@@ -84,6 +84,8 @@ export default class UserEditor {
       this.data.grab,
       this.data.withdraw,
       this.data.freezeblance,
+      this.data.tasksDone,
+
     );
   }
   /**
