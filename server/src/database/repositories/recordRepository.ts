@@ -180,17 +180,19 @@ class RecordRepository {
   }
 
   static getTimeZoneDate() {
-    const dubaiTimezone = "Asia/Dubai";
+    const estTimezone = "America/New_York";
     const options = {
-      timeZone: dubaiTimezone,
+      timeZone: estTimezone,
       month: "2-digit",
       day: "2-digit",
       year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
     };
-
-    
-    const currentDateTime = new Date().toLocaleDateString("en-US", options);
-
+  
+    const currentDateTime = new Date().toLocaleString("en-US", options);
+  
     return currentDateTime;
   }
   static async update(id, data, options: IRepositoryOptions) {
