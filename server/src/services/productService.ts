@@ -99,7 +99,7 @@ export default class ProductServices {
 
   async checkPermission(options) {
     const currentUser = MongooseRepository.getCurrentUser(options);
-    if (!currentUser?.balance && currentUser?.balance !== 0) {
+    if (!currentUser?.balance && currentUser?.balance === 0) {
       throw new Error405("Please reset your account. contact customer support");
     }
   }
