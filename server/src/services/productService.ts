@@ -97,14 +97,13 @@ export default class ProductServices {
     return ProductRepository.findAndCountAll(args, this.options);
   }
 
-  async checkpermission(options) { 
+  async checkPermission(options) {
     const currentUser = MongooseRepository.getCurrentUser(options);
-if( currentUser.grab) return 
-
-throw new Error405("Should be contact the customer service about this");
-
-
+    if (!currentUser?.balance && currentUser?.balance !== 0) {
+      throw new Error405("Please reset your account. contact customer support");
+    }
   }
+  
 
   async grapOrders(args) {
     const session = await MongooseRepository.createSession(
@@ -112,12 +111,11 @@ throw new Error405("Should be contact the customer service about this");
     );
 
     try {
-      // await this.checkpermission(this.options)
+      await this.checkPermission(this.options);
       return ProductRepository.grapOrders(this.options);
     } catch (error) {
       await MongooseRepository.abortTransaction(session);
       throw error;
-
     }
   }
 
