@@ -23,6 +23,8 @@ const schema = yup.object().shape({
   }),
 });
 
+
+
 function Profile() {
   const dispatch = useDispatch();
   const total = useSelector(selectors.selectTotal);
@@ -303,7 +305,6 @@ function Profile() {
         </div>
       </div>
       <div className="logout__button" onClick={() => doSignout()}>
-        {" "}
         Logout
       </div>
     </div>
