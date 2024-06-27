@@ -147,7 +147,6 @@ class RecordRepository {
     return data;
   }
 
-  "This is your limit. Please contact customer support for more tasks."
 
 
   static async checkOrder(options) {
@@ -167,7 +166,7 @@ class RecordRepository {
     if (currentUser && currentUser.vip && currentUser.vip.id) {
       if (currentUser.tasksDone >= dailyOrder) {
         throw new Error405(
-          "This is your limit. Please come back tomorrow to perform more tasks."
+          "This is your limit. Please contact customer support for more tasks"
         );
       }
 
