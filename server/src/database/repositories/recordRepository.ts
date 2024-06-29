@@ -448,6 +448,14 @@ class RecordRepository {
       user: currentUser.id,
     });
 
+      criteriaAnd.push({
+        status: {
+          $regex: MongooseQueryUtils.escapeRegExp("completed"),
+          $options: "i",
+        },
+      });
+
+
 
     const start = new Date();
     start.setHours(0, 0, 0, 0); // Set to the start of the current day

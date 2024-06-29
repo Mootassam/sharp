@@ -38,6 +38,7 @@ function UserTable() {
   const [showTask, setShowTask] = useState(false)
   const hasRows = useSelector(selectors.selectHasRows);
   const sorter = useSelector(selectors.selectSorter);
+  const [dailytask,setDailyTask ] = useState(0)
   const isAllSelected = useSelector(
     selectors.selectIsAllSelected,
   );
@@ -79,9 +80,12 @@ function UserTable() {
     dispatch(actions.doToggleOneSelected(id));
   };
 
-  const showThecurrentRecord = async (id, totaltask?) => {
+  const showThecurrentRecord = async (dailyTask, totaltask?) => {
+
+    // await dispatch(recordListActions.doTasksDone(id));
+
     setShowTask(true)
-    await dispatch(recordListActions.doTasksDone(id));
+    setDailyTask(dailyTask)
     setTotalTasks(totaltask);
   };
 
@@ -232,7 +236,7 @@ function UserTable() {
                       <button
                         onClick={() =>
                           showThecurrentRecord(
-                            row.id,
+                            row?.tasksDone,
                             row?.vip?.dailyorder,
                           )
                         }
@@ -294,7 +298,7 @@ function UserTable() {
           <div className='score__close' onClick={() => setShowTask(false)}> <i className='fa fa-close font' /></div>
           <div className="modal__contentscore">
             <p className="text__score">
-              {tasksdone} / {totalTask}
+              {dailytask} / {totalTask}
             </p>
           </div>
         </div>

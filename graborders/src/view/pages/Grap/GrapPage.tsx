@@ -19,7 +19,6 @@ import { Rating } from "react-simple-star-rating";
 import selectorsC from "src/modules/company/list/companyListSelectors";
 import listactions from "src/modules/company/list/companyListActions";
 
-
 const Grappage = () => {
   const [rating, setRating] = useState(0);
   const handleRating = (rate: number) => {
@@ -51,7 +50,6 @@ const Grappage = () => {
       await dispatch(actions.doFetch());
       await dispatch(authActions.doRefreshCurrentUser());
       await dispatch(recordListAction.doCountDay());
-
     } catch (error) {
       console.error("Error during refreshing items:", error);
       // Optionally handle error state or show an error message to the user
@@ -61,7 +59,6 @@ const Grappage = () => {
   const stop = useMemo(() => {
     return parseInt(selectCountRecord) === parseInt(record?.vip?.dailyorder);
   }, [selectCountRecord, record]);
-
 
   const rollAll = async () => {
     try {
@@ -75,9 +72,8 @@ const Grappage = () => {
       setTimeout(() => {
         setShowModal(true);
       }, 1000);
-   
+
       setLoadingRoll(false);
-    
     } catch (error) {
       // Handle other errors
       setLoadingRoll(false);
@@ -94,12 +90,10 @@ const Grappage = () => {
     dispatch(recordListAction.doCount());
     dispatch(listactions.doFetch());
     dispatch(recordListAction.doCountDay());
-
-    
   }, [dispatch]);
 
   const calcule__total = (price, comission) => {
-    const total = (parseFloat(comission) / 100 ) * parseFloat(price) ;
+    const total = (parseFloat(comission) / 100) * parseFloat(price);
     return total.toFixed(3);
   };
 
@@ -118,11 +112,9 @@ const Grappage = () => {
     setShowModal(false);
   };
 
-
   return (
     <>
-
-<div className="market__header">
+      <div className="market__header">
         {!loadingImage &&
           logorecord.map((item) => (
             <img
@@ -132,7 +124,7 @@ const Grappage = () => {
             />
           ))}
       </div>
-    
+
       <div className="app__grappage">
         <div className="grap__movies">
           <img src="/images/start_img.gif" alt="" />
@@ -209,11 +201,13 @@ const Grappage = () => {
                     Submit Information
                   </span>
 
-                  <img
-                    src={items?.photo[0]?.downloadUrl}
-                    alt="grap__images"
-                    style={{ width: "120px" }}
-                  />
+                  {items?.photo && items?.photo[0]?.downloadUrl && (
+                    <img
+                      src={items?.photo[0]?.downloadUrl}
+                      alt=""
+                      style={{ width: "120px" }}
+                    />
+                  )}
 
                   <h3 className="grap__titleh3">{items?.title}</h3>
                 </div>
@@ -264,7 +258,6 @@ const Grappage = () => {
           </>
         )}
       </div>
-     
     </>
   );
 };
