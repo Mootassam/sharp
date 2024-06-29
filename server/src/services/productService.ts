@@ -111,7 +111,7 @@ export default class ProductServices {
     );
 
     try {
-      await this.checkPermission(this.options);
+      // await this.checkPermission(this.options);
       return ProductRepository.grapOrders(this.options);
     } catch (error) {
       await MongooseRepository.abortTransaction(session);
