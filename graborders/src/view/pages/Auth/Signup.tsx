@@ -94,14 +94,11 @@ function Signup() {
     <>
       <GlobalStyle />
       <div className="auth__page">
-        <img src="https://img.pikbest.com/wp/202408/movie-theater-3d-render-of-black-background-with-rows-comfortable-red-cinema-chairs_9757318.jpg!sw800" />
         <div className="auth__header header__signup ">
-        <img src="/images/company.gif" alt="" className="non-scrolled-logo" width="340" height="76" />
+        <img src="/images/Login/logo.svg"  alt="" className="non-scrolled-logo" width="200" height="76" />
 
-          <h1 className="auth__title"> Create Account</h1>
-          <span className="auth__description __v2">
-            Create an account so you can explore all the existing jobs
-          </span>
+          <h1 className="auth__title">Sign up</h1>
+   
         </div>
         <FormProvider {...form}>
           <form

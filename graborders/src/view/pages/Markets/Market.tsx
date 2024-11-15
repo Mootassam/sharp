@@ -94,44 +94,64 @@ function Market() {
   const films = [
     {
       images:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEEt5Tq-Wlkt8FHmmJA6Tz5YwXqHSG2O6VNw&s",
+        "https://m.media-amazon.com/images/S/pv-target-images/e517ef1200967f6a07bad241d66d0c59a2941e54110fcd7ed4926a9d83cdc636.jpg",
       rating: 7,
     },
     {
       images:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0xBROAxD-BA1nKWFvOGJIpmrGOWmdeIvw8w&s",
+        "https://m.media-amazon.com/images/M/MV5BMTc2Mzg0NjA2N15BMl5BanBnXkFtZTcwOTc5NjQzMw@@._V1_FMjpg_UX1000_.jpg",
       rating: 8,
     },
     {
       images:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSnki6AKC5KJMU9m2uUgi1Hb77B1DIif3T6w&s",
+        "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQQCT9i0V7Ihj2aX0jyVdwAD0zfGlBexc0UJjvUW7ZgK5n1Fipc",
       rating: 9,
     },
     {
       images:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRw4__s0FQbnMao7bU-vdyPzP0Wc1MozkdZPw&s",
+        "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQP0OM70mTj4VVIbAqoDaqiNWVcZZyCR_bdxTaAH6bcYT8Yjshb",
+      rating: 6,
+    },
+    {
+      images:
+        "https://contentserver.com.au/assets/491602_p11214341_p_v8_ap.jpg",
+      rating: 7,
+    },
+    {
+      images:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVcsf2bpo5cKHGk4HRob4v6M0IFiyZdPuRGXUvxHiHhDdAOYh7",
+      rating: 8,
+    },
+    {
+      images:
+        "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQyXUYxbm9XUVlE-o4cAr0wDA0eKQSfYELT2dlX2QE9vbMo5uqo",
+      rating: 9,
+    },
+    {
+      images:
+        "https://www.movienewsletters.net/photos/255415R1.jpg",
       rating: 6,
     },
   ];
 
   const commingsoon=[   {
     images:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0JT76If8BQ4M3rIn_ImnITCjLXkO4PApaUA&s",
+      "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcS7BVyY3gGvbkvGInfa6HMVTlHuaIC2WgSfWPZM6kb-YlWB8Vl0",
     rating: 9,
   },
   {
     images:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSa0a8Giv8lr4HcNaNscUZyPw8HFh1-aPAVzQ&s",
+      "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSR6pgVhfkZKNEgcYj1W480V2rFeF1Yov8M5O2b0CSC7L4Mdgkj",
     rating: 6,
   },
   {
     images:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvc2EtG3WTc5Gx-gz449ZiWLb7rMiNunmOQw&s",
+      "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQNjatfQ7yNx3Ejq1snXteHf9TeOUmaaWjxlXnssAI6y2IE138x",
     rating: 9,
   },
   {
     images:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSk-NzYFxuW76HicYR3HUiWfylC3SwQar3WFg&s",
+      "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSAfbQzvGKy0oUKX3tKXOKirveHpqNU8fUxWNq6ghdDDLxeYxfw",
     rating: 6,
   },]
   const submit = (item) => {
@@ -198,7 +218,7 @@ function Market() {
       </div>
 
       <div className="cinema__title">
-        <h2>The Highland Cinema</h2>
+        <h2>The Light Cinema</h2>
       </div>
 
       <img

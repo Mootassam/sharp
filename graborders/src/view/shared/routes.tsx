@@ -118,6 +118,10 @@ const screenRoutes = [
 ];
 const publicRoutes = [
   {
+    path: "/getstarted",
+    loader: () => import("src/view/pages/Auth/Cover"),
+  },
+  {
     path: "/auth/signin",
     loader: () => import("src/view/pages/Auth/Signin"),
   },

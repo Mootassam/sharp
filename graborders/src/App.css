@@ -1889,7 +1889,6 @@ button:disabled {
 }
 
 .auth__header {
-  padding-top: 30px;
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -1901,11 +1900,11 @@ button:disabled {
 .header__signup {
   gap: 6px !important;
   position: relative;
-  top:-210px;
+  /* top:-210px; */
 }
 .__position__relative{ 
   position: relative;
-  top:-210px;
+  /* top:-210px; */
   
 }
 .auth__title {
@@ -1934,6 +1933,13 @@ button:disabled {
   padding-bottom: 25px;
   /* overflow-y: scroll; */
 }
+.cover__page { 
+  position: absolute;
+  bottom: 100px;
+  width: 100%;
+  left: 0;
+  right: 0;
+}
 
 ::-webkit-scrollbar {
   overflow-y: hidden;
@@ -1945,7 +1951,7 @@ button:disabled {
   align-items: center;
   position: relative;
   z-index: 100;
-  padding-top: 33px;
+  /* padding-top: 33px; */
   gap: 13px;
 }
 
@@ -1973,12 +1979,14 @@ button:disabled {
   font-size: 16px;
   padding: 15px;
   border-radius: 5px;
-  background-color: #f71a1a;
+  background-color: #f84225;
   margin-top: 45px;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
+  color: white;
+  font-weight: bold;
 }
 
 .auth__link {

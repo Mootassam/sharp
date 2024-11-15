@@ -56,14 +56,12 @@ function Signin() {
     <>
     <GlobalStyle/> 
     <div className="auth__page">
-      <img src="https://img.mediapro.dev/GV7KpxYf17U_k3cClj2nyidoyyuipzXscf9StQmtrLQ/xl/aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL2xpY2V1LXByby9hc3NldHMvZWRhMTdiNzctOTk1NC00Yzg2LTkxMmEtNDQ2NTAxMzc1MWY0LmpwZw.jpg" alt=""  />
+      <img src="https://central.lightcinemas.co.uk/pictures/headers/~EDXo9mXn/Family_shot_cinema_0771.jpg" alt=""  />
       <div className="auth__header">
-      <img src="/images/company.gif" alt="" className="non-scrolled-logo" width="340" height="76" />
+      <img src="/images/Login/logo.svg" alt="" className="non-scrolled-logo" width="180" />
 
-        <h1 className="auth__title"> Welcome Back!</h1>
-        <span className="auth__description">
-          You have been missed for long time
-        </span>
+        <h1 className="auth__title"> Sign In!</h1>
+  
       </div>
       <FormProvider {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>

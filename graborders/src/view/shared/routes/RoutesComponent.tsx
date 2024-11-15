@@ -12,10 +12,8 @@ import EmptyPermissionsRoute from "src/view/shared/routes/EmptyPermissionsRoute"
 
 function RoutesComponent() {
   const isInitialMount = useRef(true);
-
   const authLoading = useSelector(authSelectors.selectLoadingInit);
   const loading = authLoading;
-
   const currentUser = useSelector(authSelectors.selectCurrentUser);
   const currentTenant = useSelector(authSelectors.selectCurrentTenant);
   useEffect(() => {

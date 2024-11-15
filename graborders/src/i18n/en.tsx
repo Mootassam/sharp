@@ -43,7 +43,7 @@ const en = {
   },
 
   app: {
-    title: "The Highland Cinema",
+    title: "The Light Cinema",
   },
 
   api: {
