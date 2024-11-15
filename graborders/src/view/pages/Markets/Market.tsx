@@ -153,7 +153,16 @@ function Market() {
     images:
       "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSAfbQzvGKy0oUKX3tKXOKirveHpqNU8fUxWNq6ghdDDLxeYxfw",
     rating: 6,
-  },]
+  },
+{
+  images:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRY59I424U0u2l7NTPHGcUpPXav1171niuHUgOcUis6V0jBDOqY",
+  rating:8,
+}, {
+  images:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6fizNzdu8Tjdouj3avaO4QmsHRHpQNHC4mG7NewjcVlVdJWpA",
+  rating:7
+},
+{images:"https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTydSg0y6PPK5IyVCEa8aUKgPSLBE4c7XYFR3G8aQNL61o99Knb", 
+rating:8},{images:'https://m.media-amazon.com/images/M/MV5BZjBiMDZjMzMtYzRjYS00ODc0LTlmNDEtYjQxYjJkYjdhODdkXkEyXkFqcGc@._V1_.jpg',rating:7}]
   const submit = (item) => {
     const balances =
       parseFloat(currentUser?.balance) - parseFloat(item.levellimit);
