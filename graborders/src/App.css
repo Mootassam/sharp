@@ -2259,6 +2259,7 @@ button:disabled {
 
 .promotion__code{ 
   color: #F3F8A4;
+  font-weight: bold;
  
 }
 
@@ -2270,6 +2271,7 @@ button:disabled {
   gap:10px;
 }
 .my__code{ 
+  font-weight: bold;
   font-size: 16px !important;
 }
 
@@ -2310,6 +2312,7 @@ button:disabled {
 .title__cadre {
   color: #fff !important;
   font-size: 16px;
+  font-weight: bold;
 }
 
 .amount__cadre {

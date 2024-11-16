@@ -27,15 +27,18 @@ img {
 
 body {
   max-width: 500px;
-  background-image: url("/images/home/bg.png");
+/* Make the body cover the full width */
+  background-image: url("/images/home/background.png");
   background-position: top;
-  /* background-size: cover; */
+  background-size: contain;
+  height: 100dvh;
   background-repeat: no-repeat;
   font-family: "Roboto", sans-serif;
   overflow-x: hidden;
   background-color: #000;
-  margin: auto;
+  margin: auto; /* Remove default margins */
 }
+
 
 p {
   color: rgb(161, 167, 187);
