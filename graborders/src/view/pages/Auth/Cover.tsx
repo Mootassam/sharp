@@ -4,8 +4,8 @@ import {Link} from 'react-router-dom'
 const GlobalStyle = createGlobalStyle`
   body {
     background-image: url('images/Login/background.jpg');
-
     background-repeat: no-repeat;
+    background-size:cover;
   }
 `;
 

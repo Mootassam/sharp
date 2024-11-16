@@ -2735,6 +2735,7 @@ width: max-content;
 border-radius: 30px;
 color: white;
 font-size: 13px;
+font-weight: bold;
 }
 
 .auth__cinema { 
