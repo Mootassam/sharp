@@ -1979,13 +1979,13 @@ button:disabled {
   font-size: 16px;
   padding: 15px;
   border-radius: 5px;
-  background-color: #f84225;
+  background-color: #fff;
   margin-top: 45px;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
-  color: white;
+  color: #000;
   font-weight: bold;
 }
 
@@ -2258,7 +2258,7 @@ button:disabled {
 }
 
 .promotion__code{ 
-  color: #F3F8A4;
+  color: #fff;
   font-weight: bold;
  
 }
@@ -2719,7 +2719,7 @@ button:disabled {
 .credit__bar{ 
   width: 100%;
   height: 6px;
-  background-color: #EAD66A;
+  background-color: #fff;
   border-radius: 30px;
   display: flex;
   align-items: center;
@@ -2729,11 +2729,11 @@ button:disabled {
 .circle__bar{ 
   position: relative;
   right: 0;
-background-color:#EAD66A ;
+background-color:#fff ;
 padding: 4px 13px;
 width: max-content;
 border-radius: 30px;
-color: white;
+color: #000;
 font-size: 13px;
 font-weight: bold;
 }
@@ -2747,7 +2747,7 @@ font-weight: bold;
 }
 
 .register__now{
-  color: #f71a1a !important;
+  color: #ffff !important;
   font-size: 13px;
 }
 .button__error{ 

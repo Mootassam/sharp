@@ -43,7 +43,7 @@
 /* styles the tabbarBottom */
 .tabbottomNavigator {
   position: fixed;
-  background-color: #14161a;
+  background-color: #fff;
   border-top-left-radius: 19px;
   border-top-right-radius: 19px;
   width: auto;
@@ -58,8 +58,9 @@
 }
 
 .text__link {
-  color: #fff;
+  color: #000;
   font-size: 14px;
+  font-weight: bold;
 }
 
 .active {
