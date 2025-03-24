@@ -12,7 +12,7 @@ function Error403Page() {
       />
 
       <div className="error__content">
-        <h1>ERROR 500 Page</h1>
+        {/* <h1>ERROR 500 Page</h1> */}
         <div className="desc">{i18n("errors.500")}</div>
         <Link to="/">
           <button className="btn btn-primary button__error" type="button">

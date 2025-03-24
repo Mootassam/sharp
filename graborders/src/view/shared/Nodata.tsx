@@ -1,4 +1,5 @@
 import React from 'react'
+import { i18n } from '../../i18n'
 
 function Nodata() {
   return (
@@ -8,7 +9,7 @@ function Nodata() {
       <img src='/icons/nofound.svg' />
       
       
-    <span style={{color:'#8C8C8C', fontWeight:500}}> There's no transactions till now! </span> </div>
+    <span style={{color:'#8C8C8C', fontWeight:500}}> {i18n("transaction.notransaction")} </span> </div>
   ) 
 }
 

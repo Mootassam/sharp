@@ -11,14 +11,14 @@ import InputFormItem from "src/shared/form/InputFormItem";
 import selectors from "src/modules/auth/authSelectors";
 import ButtonIcon from "src/shared/ButtonIcon";
 const schema = yup.object().shape({
-  oldPassword: yupFormSchemas.string(i18n("user.fields.oldPassword"), {
+  oldPassword: yupFormSchemas.string(i18n("security.oldpassword"), {
     required: true,
   }),
-  newPassword: yupFormSchemas.string(i18n("user.fields.newPassword"), {
+  newPassword: yupFormSchemas.string(i18n("security.newpassword"), {
     required: true,
   }),
   newPasswordConfirmation: yupFormSchemas
-    .string(i18n("user.fields.newPasswordConfirmation"), {
+    .string(i18n("security.confirmpassword"), {
       required: true,
     })
     .oneOf(
@@ -49,10 +49,10 @@ function ChangePassword() {
 
   return (
     <div>
-      <SubHeader title="Change password" path="/profile" />
+      <SubHeader title={`${i18n("security.changepassword")}`} path="/profile" />
       <div className="app__wallet">
         <div className="wallet__">
-          <h3 className="hall">Change Password</h3>
+          <h3 className="hall">{i18n("security.changepassword")}</h3>
           <FormProvider {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)}>
               <div className="wallet__form">
@@ -60,7 +60,7 @@ function ChangePassword() {
                   <div className="form__group">
                     <div className="label__form">
                       <span style={{ color: "red" }}>*</span>
-                      <span style={{ fontSize: "13px" }}>Old Password</span>
+                      <span style={{ fontSize: "13px" }}>{i18n("security.oldpassword")}</span>
                     </div>
                     <div className="input__div">
                       <InputFormItem
@@ -74,7 +74,7 @@ function ChangePassword() {
                   <div className="form__group">
                     <div className="label__form">
                       <span style={{ color: "red" }}>*</span>
-                      <span style={{ fontSize: "13px" }}>New Password</span>
+                      <span style={{ fontSize: "13px" }}>{i18n("security.newpassword")}</span>
                     </div>
                     <div className="input__div">
                       <InputFormItem
@@ -88,7 +88,7 @@ function ChangePassword() {
                   <div className="form__group">
                     <div className="label__form">
                       <span style={{ color: "red" }}>*</span>
-                      <span style={{ fontSize: "13px" }}>Confirm Password</span>
+                      <span style={{ fontSize: "13px" }}>{i18n("security.confirmpassword")}</span>
                     </div>
                     <div className="input__div">
                       <InputFormItem
@@ -111,10 +111,10 @@ function ChangePassword() {
                     loading={saveLoading}
                     iconClass="far fa-save"
                   />{" "}
-                  &nbsp;Submit
+                  &nbsp;{i18n("buttons.submit")}
                 </button>
                 <span style={{ fontSize: 13, color: "white" }}>
-                  <b>Note:</b> &nbsp; Please fill out this information carefully
+                  <b>{i18n("security.note")}:</b> &nbsp; {i18n("security.notedesc")}
                 </span>
               </div>
             </form>

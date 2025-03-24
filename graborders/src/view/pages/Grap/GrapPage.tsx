@@ -18,6 +18,7 @@ import { Link } from "react-router-dom";
 import { Rating } from "react-simple-star-rating";
 import selectorsC from "src/modules/company/list/companyListSelectors";
 import listactions from "src/modules/company/list/companyListActions";
+import { i18n } from "../../../i18n";
 
 const Grappage = () => {
   const [rating, setRating] = useState(0);
@@ -103,7 +104,7 @@ const Grappage = () => {
     const values = {
       number: number,
       product: items?.id,
-      status: items?.combo ? "pending" : "completed",
+      status: items?.combo ? `${i18n("text.pending")}` : `${i18n("text.completed")}`,
       user: currentUser.id,
       rating: rating,
     };
@@ -136,17 +137,17 @@ const Grappage = () => {
             className={`button__grapstart ${lodingRoll ? "__disabled" : ""}`}
             onClick={() => rollAll()}
           >
-            Start
+            {i18n("buttons.start")}
           </button>
           <Link to={"/order"} className="butoon__order remove__lg">
-            Orders
+            {i18n("buttons.orders")}
           </Link>
         </div>
 
         <div className="terms__">
           <span>
             <Link to="/tc" className="remove__lg">
-              terms & conditions
+              {i18n("text.termsconditions")}
             </Link>
           </span>
         </div>
@@ -164,19 +165,19 @@ const Grappage = () => {
 
           <div className="film__cadre">
             <div className="cadre__filma">
-              <span className="av__balance">Today's earnings: </span>
+              <span className="av__balance"> {i18n("text.todayearning")}: </span>
               <label htmlFor="" className="balance__film">
                 ${totalperday?.toFixed(3)}
               </label>
             </div>
             <div className="cadre__filma">
-              <span className="av__balance">Account Balance : </span>
+              <span className="av__balance">{i18n("text.accountbalance")} : </span>
               <label htmlFor="" className="balance__film">
                 ${currentUser?.balance.toFixed(2)}
               </label>
             </div>
             <div className="cadre__filma">
-              <span className="av__balance">Freeze Balance : </span>
+              <span className="av__balance">{i18n("text.freezebalance")}:</span>
               <label htmlFor="" className="balance__film">
                 ${currentUser?.freezeblance?.toFixed(2)}
               </label>
@@ -198,7 +199,7 @@ const Grappage = () => {
               <div className="film__details">
                 <div className="submit__information">
                   <span className="submit__information__title">
-                    Submit Information
+                    {i18n("text.sumbitInformation")}
                   </span>
 
                   {items?.photo && items?.photo[0]?.downloadUrl && (
@@ -213,7 +214,7 @@ const Grappage = () => {
                 </div>
 
                 <div className="creation__time">
-                  <span className="title__creation">Creation time:</span>
+                  <span className="title__creation">{i18n("text.creationtime")}</span>
                   <label htmlFor="" className="date__creation">
                     {Dates.current()}
                   </label>
@@ -221,15 +222,15 @@ const Grappage = () => {
 
                 <div className="order__number">
                   <div>
-                    <span className="tile">Order Number:</span>
+                    <span className="tile">{i18n("text.ordernumber")}:</span>
                     <span>{number}</span>
                   </div>
                   <div>
-                    <span className="tile">Order amount:</span>
+                    <span className="tile">{i18n("text.orderamount")}:</span>
                     <span>${items?.amount}</span>
                   </div>
                   <div>
-                    <span className="tile">Income</span>
+                    <span className="tile">{i18n("text.income")}</span>
                     <span>
                       ${calcule__total(items?.amount, items?.commission)}
                     </span>
@@ -238,20 +239,21 @@ const Grappage = () => {
 
                 <div className="rating__box">
                   <div className="buyer__rating">
-                    Buyer Ratings ({rating}/5)
+                    {i18n("text.buyerating")}
+                    ({rating}/5)
                   </div>
                   <div>
                     {" "}
                     <Rating
                       onClick={handleRating}
                       size={20}
-                      /* Available Props */
+                    /* Available Props */
                     />
                   </div>
                 </div>
 
                 <div className="rating__submit" onClick={() => submit()}>
-                  Submit
+                  {i18n("buttons.submit")}
                 </div>
               </div>
             </div>

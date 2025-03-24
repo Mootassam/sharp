@@ -18,33 +18,33 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 const schema = yup.object().shape({
-  email: yupFormSchemas.string(i18n("user.fields.username"), {
+  email: yupFormSchemas.string(i18n("inputs.username"), {
     required: true,
   }),
 
-  password: yupFormSchemas.string(i18n("user.fields.password"), {
+  password: yupFormSchemas.string(i18n("inputs.password"), {
     required: true,
   }),
 
   newPasswordConfirmation: yupFormSchemas
-    .string(i18n("user.fields.newPasswordConfirmation"), {
+    .string(i18n("inputs.newPasswordConfirmation"), {
       required: true,
     })
     .oneOf([yup.ref("password"), null], i18n("auth.passwordChange.mustMatch")),
-  phoneNumber: yupFormSchemas.string(i18n("user.fields.phoneNumber"), {
+  phoneNumber: yupFormSchemas.string(i18n("inputs.phoneNumber"), {
     required: true,
   }),
   withdrawPassword: yupFormSchemas.string(
-    i18n("user.fields.withdrawPassword"),
+    i18n("inputs.withdrawPassword"),
     {
       required: true,
     }
   ),
-  invitationcode: yupFormSchemas.string(i18n("user.fields.invitationcode"), {
+  invitationcode: yupFormSchemas.string(i18n("inputs.invitationcode"), {
     required: true,
   }),
 
-  rememberMe: yupFormSchemas.boolean(i18n("user.fields.rememberMe")),
+  rememberMe: yupFormSchemas.boolean(i18n("inputs.rememberMe")),
 });
 
 function Signup() {
@@ -109,7 +109,7 @@ function Signup() {
               <InputFormItem
                 type="text"
                 name="email"
-                placeholder={i18n("user.fields.username")}
+                placeholder={i18n("inputs.username")}
                 className="auth__input"
                 externalErrorMessage={externalErrorMessage}
               />
@@ -117,21 +117,21 @@ function Signup() {
               <InputFormItem
                 type="text"
                 name="phoneNumber"
-                placeholder={i18n("user.fields.phoneNumber")}
+                placeholder={i18n("inputs.phoneNumber")}
                 className="auth__input"
               />
 
               <InputFormItem
                 type="password"
                 name="withdrawPassword"
-                placeholder={i18n("user.fields.withdrawPassword")}
+                placeholder={i18n("inputs.withdrawPassword")}
                 className="auth__input"
               />
 
               <InputFormItem
                 type="password"
                 name="password"
-                placeholder={i18n("user.fields.password")}
+                placeholder={i18n("inputs.password")}
                 className="auth__input"
               />
 
@@ -139,14 +139,14 @@ function Signup() {
                 type="password"
                 name="newPasswordConfirmation"
                 autoComplete="new-password"
-                placeholder={i18n("user.fields.confirmPassword")}
+                placeholder={i18n("inputs.confirmPassword")}
                 className="auth__input"
               />
 
               <InputFormItem
                 type="text"
                 name="invitationcode"
-                placeholder={i18n("user.fields.invitationcode")}
+                placeholder={i18n("inputs.invitationcode")}
                 className="auth__input"
                 externalErrorMessage={externalErrorMessage}
               />
@@ -155,10 +155,10 @@ function Signup() {
             <div className="auth__bottom">
               <button className="auth__button" disabled={loading} type="submit">
                 <ButtonIcon loading={loading} />
-                <span>Sign up</span>
+                <span>{i18n("buttons.signup")}</span>
               </button>
               <Link to="/auth/signin" className="remove__ligne">
-                <span className="auth__link">Already have an account</span>
+                <span className="auth__link">{i18n("text.haveaccount")}</span>
               </Link>
             </div>
           </form>

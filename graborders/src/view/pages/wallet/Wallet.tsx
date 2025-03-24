@@ -11,7 +11,7 @@ import InputFormItem from "src/shared/form/InputFormItem";
 import selector from "src/modules/auth/authSelectors";
 const schema = yup.object().shape({
 
-  erc20: yupFormSchemas.string(i18n("user.fields.walletAdress"), {
+  erc20: yupFormSchemas.string(i18n("inputs.walletaddress"), {
     required: true,
   }),
 });
@@ -43,10 +43,10 @@ function Wallet() {
   };
   return (
     <div>
-      <SubHeader title="Wallet" path="/profile" />
+      <SubHeader title={`${i18n("wallet.wallet")}`} path="/profile" />
       <div className="app__wallet">
         <div className="wallet__">
-          <h3 className="hall">Withdrawal method information</h3>
+          <h3 className="hall">{`${i18n("wallet.info")}`}</h3>
           <FormProvider {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)}>
               <div className="wallet__form">
@@ -54,13 +54,13 @@ function Wallet() {
                   <div className="form__group">
                     <div className="label__form">
                       <span style={{ color: "red" }}>*</span>
-                      <span style={{ fontSize: "13px" }}>Username</span>
+                      <span style={{ fontSize: "13px" }}>{`${i18n("wallet.username")}`}</span>
                     </div>
                     <div className="input__div">
                       <InputFormItem
                         type="text"
                         name="usernamewallet"
-                        placeholder={i18n("user.fields.username")}
+                        placeholder={i18n("wallet.username")}
                         className="input__"
                       />
                     </div>
@@ -68,13 +68,13 @@ function Wallet() {
                   <div className="form__group">
                     <div className="label__form">
                       <span style={{ color: "red" }}>*</span>
-                      <span style={{ fontSize: "13px" }}>Wallet Name</span>
+                      <span style={{ fontSize: "13px" }}>{`${i18n("wallet.walletname")}`}</span>
                     </div>
                     <div className="input__div">
                       <InputFormItem
                         type="text"
                         name="walletname"
-                        placeholder={i18n("user.fields.walletName")}
+                        placeholder={i18n("wallet.walletname")}
                         className="input__"
                       />
                     </div>
@@ -83,13 +83,13 @@ function Wallet() {
                   <div className="form__group">
                     <div className="label__form">
                       <span style={{ color: "red" }}>*</span>
-                      <span style={{ fontSize: "13px" }}>Wallet Address</span>
+                      <span style={{ fontSize: "13px" }}>{`${i18n("wallet.walletaddress")}`}</span>
                     </div>
                     <div className="input__div">
                       <InputFormItem
                         type="text"
                         name="erc20"
-                        placeholder={i18n("user.fields.walletAdress")}
+                        placeholder={i18n("wallet.walletaddress")}
                         className="input__"
                       />
                     </div>
@@ -101,10 +101,10 @@ function Wallet() {
                   className="confirm"
                   type="submit"
                 >
-                  Submit
+                  {i18n("buttons.submit")}
                 </button>
                 <span style={{ fontSize: 13,color:"white" }}>
-                  <b>Note:</b> &nbsp;Please be careful when filling out this information.
+                  <b>{i18n("wallet.note")}:</b> &nbsp;{i18n("wallet.notedesctiption")}
                 </span>
               </div>
             </form>

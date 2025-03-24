@@ -8,6 +8,7 @@ import Dates from "src/view/shared/utils/Dates";
 import Nodata from "src/view/shared/Nodata";
 import SubHeader from "src/view/shared/Header/SubHeader";
 import { Rating } from "react-simple-star-rating";
+import { i18n } from "../../../i18n";
 
 function Portfolio() {
   const [active, setActive] = useState("completed");
@@ -54,8 +55,8 @@ function Portfolio() {
       {record.map((item, index) => (
         <div className="single__product" key={`${item.id}-${index}`}>
           <div className="order__time">
-            <div>Order Time: {Dates.currentDate(item?.date)}</div>
-            <div>Order Number: {item.number}</div>
+            <div>{i18n('order.ordertime')}: {Dates.currentDate(item?.date)}</div>
+            <div>{i18n('order.ordernumber')}: {item.number}</div>
           </div>
           <div className={`badge__ ${item?.status}`}>
             <label>{item?.status}</label>
@@ -68,28 +69,28 @@ function Portfolio() {
               <div className="detail__name">{item?.product?.title}</div>
               <div className="detail__price">
                 <div>{item?.product?.amount}</div>
-                <div>      <Rating  initialValue={item?.rating}   readonly={true}  size={24}/>
-               </div>
+                <div>      <Rating initialValue={item?.rating} readonly={true} size={24} />
+                </div>
               </div>
             </div>
           </div>
           <div className="bottom__cadre">
             <div className="cadre__detail">
-              <div>Total order amount</div>
+              <div>{i18n('order.total')}</div>
               <div>${item?.product?.amount} </div>
             </div>
             <div className="cadre__detail">
-              <div>Commission</div>
+              <div>{i18n('order.commission')}</div>
               <div>{item?.product?.commission}% </div>
             </div>
             <div className="cadre__detail">
-              <div>Estimated return</div>
+              <div>{i18n('order.return')}</div>
               <div>
                 ${Calcule.calcule__total(
                   item?.product?.amount,
                   item?.product?.commission
                 )}{" "}
-             
+
               </div>
             </div>
           </div>
@@ -100,7 +101,7 @@ function Portfolio() {
 
   return (
     <div>
-            <SubHeader title="order" path="/profile" />
+      <SubHeader title={`${i18n('order.order')}`} path="/profile" />
 
       <div
         style={{
@@ -132,19 +133,19 @@ function Portfolio() {
               onClick={() => setActive("completed")}
               className={active === "completed" ? `active__order` : ""}
             >
-              <span>Completed</span>
+              <span>{i18n('order.completed')}</span>
             </div>
             <div
               onClick={() => setActive("pending")}
               className={active === "pending" ? `active__order` : ""}
             >
-              <span>Pending</span>
+              <span>{i18n('order.pending')}</span>
             </div>
             <div
               onClick={() => setActive("canceled")}
               className={active === "canceled" ? `active__order` : ""}
             >
-              <span>Canceled</span>
+              <span>{i18n('order.canceled')}</span>
             </div>
           </div>
         </div>

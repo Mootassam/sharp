@@ -11,6 +11,7 @@ import authSelectors from "src/modules/auth/authSelectors";
 import actions from "src/modules/auth/authActions";
 import listactions from "src/modules/company/list/companyListActions";
 import selectors from "src/modules/company/list/companyListSelectors";
+import { i18n } from "../../../i18n";
 
 function Market() {
   const dispatch = useDispatch();
@@ -216,18 +217,14 @@ rating:8},{images:'https://m.media-amazon.com/images/M/MV5BZjBiMDZjMzMtYzRjYS00O
 
           <div className="marquee">
             <span>
-              Our security is our top priority, and we want to ensure that you
-              are protected from any potential risks. Please be aware that we
-              will never request you to send money to an unknown address. Before
-              making any payments, we kindly ask you to verify the details with
-              us first.
+            {i18n("text.sponsor")}
             </span>
           </div>
         </div>
       </div>
 
       <div className="cinema__title">
-        <h2>The Light Cinema</h2>
+        <h2>{i18n("app.title")}</h2>
       </div>
 
       <img
@@ -237,8 +234,8 @@ rating:8},{images:'https://m.media-amazon.com/images/M/MV5BZjBiMDZjMzMtYzRjYS00O
       ></img>
 
       <div className="showing__films">
-        <div className={`comming__soon ${now ==='now' ? 'under__linge' : ''}`} onClick={() => setNow("now")} >showing Now </div>
-        <div className={`comming__soon ${now ==='soon' ? 'under__linge' : ''}`} onClick={() => setNow("soon")}>Coming Soon</div>
+        <div className={`comming__soon ${now ==='now' ? 'under__linge' : ''}`} onClick={() => setNow("now")} >{i18n("text.showingnow")}</div>
+        <div className={`comming__soon ${now ==='soon' ? 'under__linge' : ''}`} onClick={() => setNow("soon")}>{i18n("text.comingsoon")}</div>
       </div>
 
       {now === "now" && <div className="list__film">

@@ -5,6 +5,7 @@ import actions from "src/modules/category/list/categoryListActions";
 import selector from "src/modules/category/list/categoryListSelectors";
 import LoadingModal from "src/shared/LoadingModal";
 import SubHeader from "src/view/shared/Header/SubHeader";
+import { i18n } from "../../../i18n";
 function Online() {
   const dispatch = useDispatch();
   const record = useSelector(selector.selectRows);
@@ -17,12 +18,11 @@ function Online() {
 
   return (
     <div>
-                  <SubHeader title="Customer Services" path="/profile" />
+      <SubHeader title={i18n("cs.cs")} path="/profile" />
 
 
       <div className="online__header">
-        if you have any questions or encounter issues, please email us or chat
-        with our online customer support team.
+        {i18n("cs.note")}
       </div>
 
       <div className="contact__list">
@@ -51,7 +51,7 @@ function Online() {
                         className="fa-brands fa-whatsapp"
                         style={{ fontSize: 18 }}
                       ></i>
-                      Contact now
+                      {i18n("cs.contactnow")}
                     </div>
                   </a>
                 ) : (
@@ -65,7 +65,7 @@ function Online() {
                         className="fa-brands fa-telegram"
                         style={{ fontSize: 18 }}
                       ></i>
-                      Contact now
+                      {i18n("cs.contactnow")}
                     </div>
                   </a>
                 )}

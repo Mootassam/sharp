@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import "./styles/style.css";
+import { i18n } from "../../i18n";
 function TabBottomNavigator() {
   const location = useLocation();
 
@@ -10,19 +11,17 @@ function TabBottomNavigator() {
     {
       icon: "/images/home/home.png",
       path: "/",
-      name: "Home",
+      name: `${i18n("tabbarmenue.home")}`,
     },
-
     {
       icon: "/images/home/grab.png",
       path: "/grap",
-      name: "Rating",
+      name: `${i18n("tabbarmenue.rating")}`,
     },
-
     {
       icon: "/images/home/mine.png",
       path: "/profile",
-      name: "Profile",
+      name: `${i18n("tabbarmenue.profile")}`,
     },
   ];
   return (
@@ -40,7 +39,7 @@ function TabBottomNavigator() {
               </div>
               <div className="rating__text">
                 <p className={`text__link ${isActive(item.path) && "active"}`}>
-                  Rate
+                  {i18n("tabbarmenue.rate")}
                 </p>
               </div>
             </div>
