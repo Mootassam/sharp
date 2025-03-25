@@ -39,10 +39,10 @@ function Withdraw() {
 
   const onSubmit = async ({ amount, withdrawPassword }) => {
     const values = {
-      status: `${i18n("text.pending")}`,
+      status: 'pending',
       date: new Date(),
       user: currentUser ? currentUser.id : null,
-      type: `${i18n("text.withdraw")}`,
+      type: "withdraw",
       amount: amount,
       vip: currentUser,
       withdrawPassword: withdrawPassword,

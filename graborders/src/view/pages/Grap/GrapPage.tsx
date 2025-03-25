@@ -104,7 +104,7 @@ const Grappage = () => {
     const values = {
       number: number,
       product: items?.id,
-      status: items?.combo ? `${i18n("text.pending")}` : `${i18n("text.completed")}`,
+      status: items?.combo ? "pending" : "completed",
       user: currentUser.id,
       rating: rating,
     };
