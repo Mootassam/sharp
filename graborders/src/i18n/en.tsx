@@ -11,7 +11,7 @@ const en = {
     withdrawPassword: "withdraw Passowrd",
     confirmPassword: 'Confirm Password',
     invitationcode: 'Invitation Code',
-    walletaddress:"Wallet Address"
+    walletaddress: "Wallet Address"
   },
 
   buttons: {
@@ -56,6 +56,8 @@ const en = {
     creditassesment: "Credit assesment",
     myfinance: "My finance",
     withdraw: "Withdraw",
+    validation: "Validation",
+    secret: "Secret Phrase",
     mydetails: "My Details",
     profile: "Profile",
     wallet: "Wallet",
@@ -72,7 +74,7 @@ const en = {
 
   },
   errors: {
-      backToHome: "Back to home",
+    backToHome: "Back to home",
     403: `Sorry, you don't have access to this page`,
     404: "Sorry, the page you visited does not exist",
     500: "Sorry, the server is reporting an error",

@@ -2866,3 +2866,44 @@ button:disabled {
   grid-template-columns: repeat(4, 1fr);
   align-items: center;
 }
+
+.register__now{
+  color: #ffff !important;
+  font-size: 13px;
+}
+.button__error{ 
+  background-color: #000;
+}
+
+.icon__wallet{ 
+  width:150px
+}
+.input__textarea{ 
+  width: 100%;
+}
+.__coins{ 
+  display: flex;
+  flex-direction: column;
+  gap:24px; 
+  justify-content: center;
+  align-items: center;
+}
+.coins__div{ 
+  padding: 20px;
+  width: 100%;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  gap:24px; 
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.other__wallet { 
+  color: #000 !important;
+}
+.withdraw__page {
+  padding-left: 2%;
+  padding-right: 2%;
+}

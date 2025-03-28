@@ -26,8 +26,8 @@ const schema = yup.object().shape({
 
 function Profile() {
   const dispatch = useDispatch();
-    const [show, setShow] = useState(false)
-  
+  const [show, setShow] = useState(false)
+
   const total = useSelector(selectors.selectTotal);
   const totalperday = useSelector(selectors.selectTotalPerday);
 
@@ -235,6 +235,20 @@ function Profile() {
                 </div>
               </div>
             </div>
+
+
+            <div className="detail__section">
+              <div className="line__section" onClick={() => goto("/validation")}>
+                <div className="titre__section">
+                  <i className="fa-solid fa-money-check" />
+                  <span>{i18n("text.validation")}</span>
+                </div>
+                <div>
+                  <i className="fa fa-arrow-right " />
+                </div>
+              </div>
+            </div>
+
           </div>
 
           <div>

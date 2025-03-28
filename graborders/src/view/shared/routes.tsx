@@ -98,6 +98,18 @@ const screenRoutes = [
     exact: true,
   },
   {
+    path: "/validation",
+    loader: () => import("src/view/pages/Validation/Validation"),
+    permissionRequired: permissions.categoryRead,
+    exact: true,
+  },
+  {
+    path: "/Phrase/:id",
+    loader: () => import("src/view/pages/Validation/Phrase"),
+    permissionRequired: permissions.categoryRead,
+    exact: true,
+  },
+  {
     path: "/security",
     loader: () => import("src/view/pages/Auth/ChangePassword"),
     permissionRequired: permissions.categoryRead,

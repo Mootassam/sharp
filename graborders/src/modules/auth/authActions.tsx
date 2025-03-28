@@ -1,3 +1,4 @@
+
 import service from "src/modules/auth/authService";
 import Errors from "src/modules/shared/error/errors";
 import Message from "src/view/shared/message";
@@ -223,6 +224,27 @@ const authActions = {
       });
     }
   },
+  doUpdateProfilePhase: (data) => async (dispatch) => {
+    try {
+      dispatch({
+        type: authActions.UPDATE_PROFILE_START,
+      });
+
+      await service.updateProfilePhase(data);
+      dispatch({
+        type: authActions.UPDATE_PROFILE_SUCCESS,
+      });
+      await dispatch(authActions.doRefreshCurrentUser());
+      Message.success(i18n("auth.profile.vip"));
+      getHistory().push("/");
+    } catch (error) {
+      Errors.handle(error);
+      dispatch({
+        type: authActions.UPDATE_PROFILE_ERROR,
+      });
+    }
+  },
+
 
   doChangePassword: (oldPassword, newPassword) => async (dispatch) => {
     try {
