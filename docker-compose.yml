@@ -1,7 +1,9 @@
 version: "3.3"
+
 services:
   backend:
     build: ./server
+    image: sharp_backend:latest
     ports:
       - 8080:8080
     restart: unless-stopped
@@ -9,6 +11,7 @@ services:
       - upload:/upload
     environment:
       DATABASE_CONNECTION: mongodb://db/grap
+
   db:
     image: mongo:4.0-xenial
     ports:
@@ -16,8 +19,10 @@ services:
     restart: unless-stopped
     volumes:
       - phone:/data/db
+
   web:
     build: ./admin
+    image: sharp_web:latest
     ports:
       - 3055:80
     restart: unless-stopped
@@ -28,9 +33,10 @@ services:
     environment:
       - CHOKIDAR_USEPOLLING=true
 
-
+  # Uncomment this block if you want to include the graborders service
   # web1:
   #   build: ./graborders
+  #   image: sharp_web1:latest
   #   ports:
   #     - 3015:80
   #   restart: unless-stopped
