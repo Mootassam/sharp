@@ -56,6 +56,12 @@ export default (app) => {
   );  
 
 
+
+  app.put(
+    `/profile/phase/`,
+    require('./phase').default,
+  );
+
   app.put(
     `/auth/profile`,
     require('./authUpdateProfile').default,

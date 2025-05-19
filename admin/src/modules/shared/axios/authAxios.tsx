@@ -6,8 +6,8 @@ import Qs from 'qs';
 import moment from 'moment';
 
 const authAxios = Axios.create({
-  // baseURL: "http://192.168.1.16:8080/api", 
-  baseURL: "http://203.161.50.129:8080/api",
+  baseURL: "http://localhost:8080/api",
+  // baseURL: "http://203.161.50.129:8080/api",
   paramsSerializer: function (params) {
     return Qs.stringify(params, {
       arrayFormat: 'brackets',

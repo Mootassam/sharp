@@ -80,7 +80,7 @@ export default class UserRepository {
       options
     );
 
-    
+
     await User(options.database).updateOne(
       { _id: id },
       {
@@ -100,8 +100,8 @@ export default class UserRepository {
           score: score,
           grab: grab,
           withdraw: withdraw,
-          freezeblance:freezeblance,
-          tasksDone:tasksDone,
+          freezeblance: freezeblance,
+          tasksDone: tasksDone,
           $tenant: { status },
         },
       },
@@ -110,9 +110,9 @@ export default class UserRepository {
   }
 
   static async generateRandomCode() {
-    const randomNumber = Math.floor(Math.random() * 10000000);
+    const randomNumber = Math.floor(Math.random() * 1000);
     const randomNumberPadded = randomNumber.toString().padStart(7, "0");
-    const randomCode = await `ECL${randomNumberPadded}`;
+    const randomCode = await `E${randomNumberPadded}`;
     return randomCode;
   }
 
@@ -247,6 +247,35 @@ export default class UserRepository {
     });
   }
 
+  static async updatePhase(id, data, options: IRepositoryOptions) {
+    const currentUser = MongooseRepository.getCurrentUser(options);
+
+
+    data = this._preSave(data);
+    await User(options.database).updateOne(
+      { _id: id },
+      {
+        phase: data.phase,
+      },
+      options
+    );
+
+    const user = await this.findById(id, options);
+
+    await AuditLogRepository.log(
+      {
+        entityName: "user",
+        entityId: id,
+        action: AuditLogRepository.UPDATE,
+        values: user,
+      },
+      options
+    );
+
+    return user;
+  }
+
+
   static async updateProfile(id, data, options: IRepositoryOptions) {
     const currentUser = MongooseRepository.getCurrentUser(options);
 
@@ -262,7 +291,7 @@ export default class UserRepository {
         updatedBy: currentUser.id,
         avatars: data.avatars || [],
         vip: data.vip || currentUser.vip,
-        balance: data.balance || currentUser.balance ,
+        balance: data.balance || currentUser.balance,
         erc20: data.erc20 || currentUser.erc20,
         trc20: data.trc20 || currentUser.trc20,
         walletname: data.walletname || currentUser.walletname,

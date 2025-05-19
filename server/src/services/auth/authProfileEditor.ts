@@ -43,6 +43,37 @@ export default class AuthProfileEditor {
     }
   }
 
+
+  async executePhase(data) {
+    this.data = data;
+
+    await this._validate();
+
+    try {
+      this.session = await MongooseRepository.createSession(
+        this.options.database,
+      );
+
+      await UserRepository.updatePhase(
+        this.options.currentUser.id,
+        this.data,
+        {
+          ...this.options,
+          bypassPermissionValidation: true,
+        },
+      );
+
+      await MongooseRepository.commitTransaction(
+        this.session,
+      );
+    } catch (error) {
+      await MongooseRepository.abortTransaction(
+        this.session,
+      );
+      throw error;
+    }
+  }
+
   async _validate() {
     assert(
       this.options.currentUser,
