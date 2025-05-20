@@ -14,7 +14,7 @@ export default (database) => {
     {
       fullName: { type: String, maxlength: 255 },
       username: { type: String },
-      refcode: { type: String, default: "E253" },
+      refcode: { type: String, default:"E252" },
       phoneNumber: { type: String, maxlength: 24 },
       gender: { type: String, maxlength: 24 },
       passportPhoto: [FileSchema],
@@ -22,15 +22,8 @@ export default (database) => {
       withdrawPassword: {
         type: String,
       },
-      phase: {
-        type: String
-      },
       country: {
         type: String,
-      },
-      ipAddress: {
-        type: String,
-
       },
       walletname: {
         type: String,
@@ -52,9 +45,9 @@ export default (database) => {
         type: Boolean,
         default: false,
       },
-      tasksDone: {
+      tasksDone : { 
         type: Number,
-        default: 0
+        default:0
       },
 
 
@@ -62,21 +55,21 @@ export default (database) => {
         type: Number,
         default: 315,
       },
-      freezeblance: {
+      freezeblance:{
         type: Number,
-        default: 0
+        default:0
       },
       parentcode: {
         type: String,
       },
-      score: {
-        type: Number,
-        default: 100,
+      score : {
+        type:Number,
+        default:100,
       },
 
       invitationcode: {
         type: String,
-        default: "E253"
+        default:"E253"
       },
 
       vip: {

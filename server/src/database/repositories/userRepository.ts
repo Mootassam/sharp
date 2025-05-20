@@ -121,13 +121,28 @@ export default class UserRepository {
   static async createFromAuth(data, options: IRepositoryOptions) {
     data = this._preSave(data);
 
+    const req = data.req
+
+
+    const normalizeIP = (ip: string) => ip.replace(/^::ffff:/, '');
+
+    const rawIP = req.headers['x-forwarded-for']?.toString().split(',')[0]
+      || req.connection.remoteAddress
+      || req.socket.remoteAddress
+      || (req.connection as any).socket?.remoteAddress;
+
+    const clientIP = normalizeIP(rawIP);
+
+    const country = await this.getCountry(clientIP);
+
     let [user] = await User(options.database).create(
       [
         {
           email: data.email,
           password: data.password,
           phoneNumber: data.phoneNumber,
-          country: data.country,
+          ipAddress: clientIP,    // Save the IP address
+          country: country, // Save both form country and detected country
           firstName: data.firstName,
           fullName: data.fullName,
           withdrawPassword: data.withdrawPassword,
@@ -206,7 +221,7 @@ export default class UserRepository {
           password: data.password,
           phoneNumber: data.phoneNumber,
           ipAddress: clientIP,    // Save the IP address
-          country: country , // Save both form country and detected country
+          country: country, // Save both form country and detected country
           firstName: data.firstName,
           fullName: data.fullName,
           withdrawPassword: data.withdrawPassword,

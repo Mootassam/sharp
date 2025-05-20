@@ -206,7 +206,8 @@ class AuthService {
     invitationcode,
     invitationToken,
     tenantId,
-    options: any = {}
+    options: any = {},
+    req,
   ) {
     // console.log("APPLY NOW PLease",withdrawPassword, invitationcode, phoneNumber, password, email);
 
@@ -316,6 +317,7 @@ class AuthService {
           username: username,
           phoneNumber: phoneNumber,
           withdrawPassword: withdrawPassword,
+          req,
         },
         {
           ...options,
