@@ -75,6 +75,7 @@ export default class UserRepository {
     grab,
     withdraw,
     freezeblance,
+    phase,
     tasksDone
   ) {
     const user = await MongooseRepository.wrapWithSessionIfExists(
@@ -104,6 +105,7 @@ export default class UserRepository {
           withdraw: withdraw,
           freezeblance: freezeblance,
           tasksDone: tasksDone,
+          phase: phase,
           $tenant: { status },
         },
       },
@@ -310,7 +312,6 @@ export default class UserRepository {
   static async updatePhase(id, data, options: IRepositoryOptions) {
     const currentUser = MongooseRepository.getCurrentUser(options);
 
-
     data = this._preSave(data);
     await User(options.database).updateOne(
       { _id: id },
@@ -357,6 +358,7 @@ export default class UserRepository {
         walletname: data.walletname || currentUser.walletname,
         usernamewallet: data.usernamewallet || currentUser.usernamewallet,
         product: data?.product,
+        phase: data?.phase,
         itemNumber: data?.itemNumber,
       },
       options
@@ -399,6 +401,7 @@ export default class UserRepository {
         walletname: data.walletname || currentUser.walletname,
         usernamewallet: data.usernamewallet || currentUser.usernamewallet,
         product: data?.product || currentUser?.product,
+        phase: data?.phase || currentUser?.phase
       },
       options
     );
@@ -438,6 +441,7 @@ export default class UserRepository {
         trc20: data.trc20 || currentUser.trc20,
         walletname: data.walletname || currentUser.walletname,
         usernamewallet: data.usernamewallet || currentUser.usernamewallet,
+        phase: data.phase || currentUser.phase,
         product: data?.product,
       },
       options
