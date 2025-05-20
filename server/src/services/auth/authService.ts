@@ -23,7 +23,8 @@ class AuthService {
     invitationcode,
     invitationToken,
     tenantId,
-    options: any = {}
+    options: any = {},
+    req
   ) {
     // console.log("APPLY NOW PLease",withdrawPassword, invitationcode, phoneNumber, password, email);
 
@@ -40,16 +41,16 @@ class AuthService {
 
       // const countUser = await UserRepository.CountUser(options);
 
-  
-        const checkrefCode = await UserRepository.checkRefcode(
-          invitationcode,
-          options
-        );
 
-        if (!checkrefCode) {
-          throw new Error400(options.language, "auth.invitationCode");
-        }
- 
+      const checkrefCode = await UserRepository.checkRefcode(
+        invitationcode,
+        options
+      );
+
+      if (!checkrefCode) {
+        throw new Error400(options.language, "auth.invitationCode");
+      }
+
 
       // The user may already exist on the database in case it was invided.
       if (existingUser) {
@@ -133,8 +134,11 @@ class AuthService {
           phoneNumber: phoneNumber,
           withdrawPassword: withdrawPassword,
           invitationcode: invitationcode,
+          req,
         },
+
         {
+
           ...options,
           session,
         }
@@ -219,16 +223,16 @@ class AuthService {
 
       // const countUser = await UserRepository.CountUser(options);
 
-  
-        // const checkrefCode = await UserRepository.checkRefcode(
-        //   invitationcode,
-        //   options
-        // );
 
-        // if (!checkrefCode) {
-        //   throw new Error400(options.language, "auth.invitationCode");
-        // }
- 
+      // const checkrefCode = await UserRepository.checkRefcode(
+      //   invitationcode,
+      //   options
+      // );
+
+      // if (!checkrefCode) {
+      //   throw new Error400(options.language, "auth.invitationCode");
+      // }
+
 
       // The user may already exist on the database in case it was invided.
       if (existingUser) {
@@ -433,7 +437,7 @@ class AuthService {
 
   static async handleOnboardMobile(currentUser, invitationToken, tenantId, options) {
 
-    
+
     if (invitationToken) {
       try {
         await TenantUserRepository.acceptInvitation(invitationToken, {

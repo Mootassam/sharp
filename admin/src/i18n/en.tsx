@@ -64,6 +64,7 @@ const en = {
         product: 'product',
         number: 'record Number',
         status: 'status',
+
       },
       list: {
         title: 'List of records',
@@ -1696,7 +1697,7 @@ const en = {
         title: 'Edit Product',
       },
       fields: {
-        combo:"Combo",
+        combo: "Combo",
         vip: 'vip',
         title: 'Product Name',
         amount: 'Product Price',
@@ -2623,19 +2624,20 @@ const en = {
 
   user: {
     fields: {
-      currentrecord:"Tasks Done",
-      freezeblance:"Freeze Balance",
+      currentrecord: "Tasks Done",
+      freezeblance: "Freeze Balance",
       id: 'Id',
-      tasksDone : 'tasksDone',
+      location: "Location",
+      tasksDone: 'tasksDone',
       avatars: 'Avatar',
       email: 'Email',
-      username : 'Username',
+      username: 'Username',
       refcode: "refcode",
       score: "Score",
-      grab:"Grab",
-      withdraw:"Withdraw",
-      invitationcode:"My code",
-      withdrawPassword:'withdraw Password',
+      grab: "Grab",
+      withdraw: "Withdraw",
+      invitationcode: "My code",
+      withdrawPassword: 'withdraw Password',
       emails: 'Email(s)',
       fullName: 'Name',
       itemNumber: 'itemNumber',

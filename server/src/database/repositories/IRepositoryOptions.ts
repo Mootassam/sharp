@@ -5,4 +5,5 @@ export interface IRepositoryOptions {
   currentTenant?: any;
   session?: any;
   bypassPermissionValidation?: any;
+  headers?: any; // Add this line to include the request object
 }

@@ -38,7 +38,7 @@ function UserTable() {
   const [showTask, setShowTask] = useState(false)
   const hasRows = useSelector(selectors.selectHasRows);
   const sorter = useSelector(selectors.selectSorter);
-  const [dailytask,setDailyTask ] = useState(0)
+  const [dailytask, setDailyTask] = useState(0)
   const isAllSelected = useSelector(
     selectors.selectIsAllSelected,
   );
@@ -89,7 +89,7 @@ function UserTable() {
     setTotalTasks(totaltask);
   };
 
-  useEffect(() => {}, [dispatch, tasksdone]);
+  useEffect(() => { }, [dispatch, tasksdone]);
 
   return (
     <>
@@ -149,6 +149,14 @@ function UserTable() {
                   sorter={sorter}
                   name={'refcode'}
                   label={i18n('user.fields.refcode')}
+                />
+
+                <TableColumnHeader
+                  onSort={doChangeSort}
+                  hasRows={hasRows}
+                  sorter={sorter}
+                  name={'refcode'}
+                  label={i18n('user.fields.location')}
                 />
                 <TableColumnHeader
                   label={i18n('user.fields.roles')}
@@ -219,6 +227,8 @@ function UserTable() {
                     <td>{row.fullName}</td>
                     <td>{row.invitationcode}</td>
                     <td>{row.refcode}</td>
+                    <td> {row.ipAddress} <br /> {row.country}
+                    </td>
                     <td>
                       {row.roles.map((roleId) => (
                         <div key={roleId}>

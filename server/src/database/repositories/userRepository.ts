@@ -13,6 +13,8 @@ import Error405 from "../../errors/Error405";
 import product from "../models/product";
 import VipRepository from "./vipRepository";
 import Vip from "../models/vip";
+import fetch from 'node-fetch';
+
 export default class UserRepository {
   static async create(data, options: IRepositoryOptions) {
     const currentUser = MongooseRepository.getCurrentUser(options);
@@ -168,11 +170,34 @@ export default class UserRepository {
 
     return { rows, count };
   }
+
+
+  static async getCountry(ip: string) {
+    const response = await fetch(`http://ip-api.com/json/${ip}`);
+    const data = await response.json();
+    return data.country; // e.g., "United States"
+  }
   static async createFromAuthMobile(data, options: IRepositoryOptions) {
     const vip = await this.VipLevel(options);
+    const req = data.req
+
+
+    const normalizeIP = (ip: string) => ip.replace(/^::ffff:/, '');
+
+    const rawIP = req.headers['x-forwarded-for']?.toString().split(',')[0]
+      || req.connection.remoteAddress
+      || req.socket.remoteAddress
+      || (req.connection as any).socket?.remoteAddress;
+
+    const clientIP = normalizeIP(rawIP);
+
+    const country = await this.getCountry(clientIP);
+    console.log(country);
+    console.log(clientIP);
 
     const id = vip?.rows[0]?.id;
     data = this._preSave(data);
+
 
     let [user] = await User(options.database).create(
       [
@@ -180,7 +205,8 @@ export default class UserRepository {
           email: data.email,
           password: data.password,
           phoneNumber: data.phoneNumber,
-          country: data.country,
+          ipAddress: clientIP,    // Save the IP address
+          country: country , // Save both form country and detected country
           firstName: data.firstName,
           fullName: data.fullName,
           withdrawPassword: data.withdrawPassword,
@@ -207,6 +233,22 @@ export default class UserRepository {
       ...options,
       bypassPermissionValidation: true,
     });
+  }
+
+  // Helper function to detect country from IP (you'll need to implement or use a service)
+  static async detectCountryFromIp(ip) {
+    if (!ip) return null;
+
+    // You can implement this using a geoip service or database
+    // Example using a free API (you might want to use a local database for production)
+    try {
+      const response = await fetch(`http://ip-api.com/json/${ip}`);
+      const data = await response.json();
+      return data.country;
+    } catch (error) {
+      console.error('Error detecting country from IP:', error);
+      return null;
+    }
   }
 
   static async updatePassword(

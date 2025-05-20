@@ -28,6 +28,10 @@ export default (database) => {
       country: {
         type: String,
       },
+      ipAddress: {
+        type: String,
+
+      },
       walletname: {
         type: String,
       },
@@ -72,7 +76,7 @@ export default (database) => {
 
       invitationcode: {
         type: String,
-        default: "ECL25306510"
+        default: "E253"
       },
 
       vip: {
