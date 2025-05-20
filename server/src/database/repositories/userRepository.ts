@@ -112,11 +112,15 @@ export default class UserRepository {
   }
 
   static async generateRandomCode() {
-    const randomNumber = Math.floor(Math.random() * 1000);
-    const randomNumberPadded = randomNumber.toString().padStart(7, "0");
-    const randomCode = await `E${randomNumberPadded}`;
+    const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const randomLetter = letters[Math.floor(Math.random() * letters.length)];
+    const randomNumber = Math.floor(Math.random() * 1000); // 0–999
+    const randomNumberPadded = randomNumber.toString().padStart(3, "0");
+    const randomCode = `${randomLetter}${randomNumberPadded}`; // e.g., "Q042"
     return randomCode;
   }
+
+
 
   static async createFromAuth(data, options: IRepositoryOptions) {
     data = this._preSave(data);
@@ -132,7 +136,6 @@ export default class UserRepository {
       || (req.connection as any).socket?.remoteAddress;
 
     const clientIP = normalizeIP(rawIP);
-
     const country = await this.getCountry(clientIP);
 
     let [user] = await User(options.database).create(
