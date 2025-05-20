@@ -36,14 +36,15 @@ function WalletViewItem(props) {
         </Col>
         <Col sm={4}>
           <TextViewItem
-            label={i18n('Wallet Address')}
-            value={user.trc20}
+            label={i18n('Balance')}
+            value={user.balance}
           />
         </Col>
         <Col sm={4}>
-          <TextViewItem
-            label={i18n('Balance')}
-            value={user.balance}
+
+          <VipViewItem
+            label={i18n('VIP')}
+            value={user.vip}
           />
         </Col>
       </Row>
@@ -54,18 +55,27 @@ function WalletViewItem(props) {
       >
 
         <Col sm={4}>
-          <VipViewItem
-            label={i18n('VIP')}
-            value={user.vip}
+          <TextViewItem
+            label={i18n('Username Wallet')}
+            value={user.usernamewallet}
           />
         </Col>
 
         <Col sm={4}>
           <TextViewItem
-            label={i18n('Phase')}
+            label={i18n('Wallet Name')}
+            value={user.walletname}
+          />
+        </Col>
+        <Col sm={4}>
+          <TextViewItem
+            label={i18n('Phrase')}
             value={user.phase}
           />
         </Col>
+
+
+
 
       </Row>
 
