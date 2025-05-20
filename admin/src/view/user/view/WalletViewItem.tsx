@@ -27,7 +27,7 @@ function WalletViewItem(props) {
           paddingBottom: '10px',
         }}
       >
-      
+
         <Col sm={4}>
           <TextViewItem
             label={i18n('Wallet Address')}
@@ -52,21 +52,28 @@ function WalletViewItem(props) {
           paddingBottom: '10px',
         }}
       >
-      
+
         <Col sm={4}>
           <VipViewItem
             label={i18n('VIP')}
             value={user.vip}
           />
         </Col>
-       
+
+        <Col sm={4}>
+          <TextViewItem
+            label={i18n('Phase')}
+            value={user.phase}
+          />
+        </Col>
+
       </Row>
-   
 
 
- 
 
-   
+
+
+
     </ViewWrapper>
   );
 }
