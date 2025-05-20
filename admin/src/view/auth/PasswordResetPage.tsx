@@ -57,9 +57,8 @@ function PasswordResetPage() {
   return (
     <Wrapper
       style={{
-        backgroundImage: `url(${
-          backgroundImageUrl || '/images/forgotPassword.jpg'
-        })`,
+        backgroundImage: `url(${backgroundImageUrl || '/images/forgotPassword.jpg'
+          })`,
       }}
     >
       <Content>
