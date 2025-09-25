@@ -128,8 +128,6 @@ export default class UserRepository {
     data = this._preSave(data);
 
     const req = data.req
-
-
     const normalizeIP = (ip: string) => ip.replace(/^::ffff:/, '');
 
     const rawIP = req.headers['x-forwarded-for']?.toString().split(',')[0]

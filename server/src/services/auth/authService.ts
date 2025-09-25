@@ -136,7 +136,6 @@ class AuthService {
           invitationcode: invitationcode,
           req,
         },
-
         {
 
           ...options,
