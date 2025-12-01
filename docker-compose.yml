@@ -24,7 +24,7 @@ services:
     build: ./admin
     image: sharp_web:latest
     ports:
-      - 3055:80
+      - 3057:80
     restart: unless-stopped
     volumes:
       - "./admin:/app"
