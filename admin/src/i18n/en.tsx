@@ -107,6 +107,8 @@ const en = {
         commissionrate: ' commission rate',
         levelLimit: 'Level Limit',
         levellimit: '',
+         min: "Min Amount",
+        max: "Max Amount",
       },
       new: {
         title: 'Add New Vip',
@@ -1712,6 +1714,7 @@ const en = {
         isSpecification: 'Is Specification',
         details: 'Details',
         photo: 'Photo',
+         image: 'Image',
         discountPriceRange: 'Discount Price',
         discountPrice: 'Current Price',
         previousPriceRange: 'Previous Price',

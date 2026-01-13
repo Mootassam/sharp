@@ -21,7 +21,7 @@ function EmptyPermissionsRoute({
           return (
             <Redirect
               to={{
-                pathname: '/getstarted',
+                pathname: '/auth/signin',
               }}
             />
           );

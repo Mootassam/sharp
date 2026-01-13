@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>CineMax | Home</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: white;
+            background: radial-gradient(circle at center top, #0a1c3a, #051122 900px, #051122);
+            min-height: 100vh;
+            overflow-x: hidden;
+            max-width: 430px;
+            margin: 0 auto;
+            position: relative;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        .app-container {
+            padding-bottom: 80px; /* Space for bottom navigation */
+        }
+        
+        .container {
+            width: 100%;
+            padding: 0 16px;
+        }
+        
+        /* Header styles */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0 15px;
+            position: sticky;
+            top: 0;
+            background: rgba(5, 17, 34, 0.9);
+            z-index: 10;
+            backdrop-filter: blur(10px);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .logo i {
+            color: #0068c8;
+        }
+        
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .notification-btn {
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #ff4757;
+            color: white;
+            font-size: 0.7rem;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Location selector */
+        .location-selector {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 50px;
+            padding: 10px 16px;
+            margin: 10px 0 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+        
+        .location-selector i {
+            color: #0068c8;
+        }
+        
+        /* Hero banner */
+        .hero-banner {
+            background: linear-gradient(to right, #0a1c3a, #0068c8);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 15px 0 25px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-banner::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 150px;
+            height: 150px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+        
+        .hero-banner h2 {
+            font-size: 1.4rem;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-banner p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-btn {
+            background: white;
+            color: #0a1c3a;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Top Movies Slider */
+        .top-movies-header {
+            margin: 30px 0 15px;
+            font-size: 1.3rem;
+        }
+        
+        .top-movies-slider {
+            display: flex;
+            overflow-x: auto;
+            gap: 15px;
+            margin: 10px 0 30px;
+            padding-bottom: 15px;
+            scrollbar-width: none;
+        }
+        
+        .top-movies-slider::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .top-movie-card {
+            flex: 0 0 auto;
+            width: 280px;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .top-movie-poster {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .play-icon-overlay {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 36px;
+            height: 36px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1rem;
+            z-index: 2;
+        }
+        
+        .top-movie-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+            padding: 15px;
+        }
+        
+        .top-movie-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        /* Films Section with Tabs */
+        .films-section {
+            margin: 30px 0;
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .section-header h3 {
+            font-size: 1.3rem;
+        }
+        
+        /* Tabs Styling */
+        .tabs-container {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 5px;
+            margin-bottom: 20px;
+            display: flex;
+        }
+        
+        .tab {
+            flex: 1;
+            text-align: center;
+            padding: 12px 0;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tab.active {
+            background: #0068c8;
+            color: white;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        /* Films Grid */
+        .films-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .film-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .film-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .film-poster {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .film-play-icon {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 32px;
+            height: 32px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.9rem;
+        }
+        
+        .film-info {
+            padding: 12px;
+        }
+        
+        .film-title {
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-align: center;
+        }
+        
+        /* Bottom navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #0a1c3a;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 0;
+            max-width: 430px;
+            margin: 0 auto;
+            z-index: 100;
+        }
+        
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.8rem;
+            transition: color 0.3s;
+        }
+        
+        .nav-item.active {
+            color: #0068c8;
+        }
+        
+        .nav-item i {
+            font-size: 1.2rem;
+        }
+        
+        /* Coming soon section */
+        .coming-soon {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            padding: 15px;
+            margin: 20px 0;
+            border-left: 4px solid #0068c8;
+        }
+        
+        .coming-soon h4 {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .coming-soon h4 i {
+            color: #ffc107;
+        }
+        
+        .coming-soon p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header>
+            <a href="#" class="logo">
+                <i class="fas fa-film"></i>
+                <span>CineMax</span>
+            </a>
+          
+        </header>
+        
+        <div class="container">
+            <!-- Location selector -->
+            <div class="location-selector" id="locationSelector">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Cinema Central, Downtown</span>
+                <i class="fas fa-chevron-down" style="margin-left: auto;"></i>
+            </div>
+            
+            <!-- Hero banner -->
+            <div class="hero-banner">
+                <h2>Book 2 Tickets, Get 1 Free!</h2>
+                <p>Special weekend offer. Valid until Sunday. Limited seats available.</p>
+                <button class="hero-btn">Claim Offer</button>
+            </div>
+            
+            <!-- Top Movies Slider Section -->
+            <h3 class="top-movies-header">Top Movies This Week</h3>
+            <div class="top-movies-slider" id="topMoviesSlider">
+                <!-- Top movies will be populated by JavaScript -->
+            </div>
+            
+            <!-- Films Section with Tabs -->
+            <div class="films-section">
+                <div class="section-header">
+                    <h3>Films</h3>
+                </div>
+                
+                <!-- Tabs -->
+                <div class="tabs-container">
+                    <div class="tab active" data-tab="all-films">All Films</div>
+                    <div class="tab" data-tab="now-showing">Now Showing</div>
+                </div>
+                
+                <!-- All Films Tab Content -->
+                <div class="tab-content active" id="all-films-content">
+                    <div class="films-grid" id="allFilmsGrid">
+                        <!-- All films will be populated by JavaScript -->
+                    </div>
+                </div>
+                
+                <!-- Now Showing Tab Content -->
+                <div class="tab-content" id="now-showing-content">
+                    <div class="films-grid" id="nowShowingGrid">
+                        <!-- Now showing films will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Coming soon section -->
+            <div class="coming-soon">
+                <h4><i class="fas fa-clock"></i> Coming Soon</h4>
+                <p>Don't miss "Deadpool & Wolverine" and "Moana 2" - coming to theaters next month. Pre-book your tickets now!</p>
+            </div>
+        </div>
+        
+        <!-- Bottom navigation -->
+        <nav class="bottom-nav">
+            <a href="#" class="nav-item active">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </a>
+            
+            <a href="#" class="nav-item">
+                <i class="fas fa-star"></i>
+                <span>Rate</span>
+            </a>
+            
+            <a href="#" class="nav-item">
+                <i class="fas fa-user"></i>
+                <span>Profile</span>
+            </a>
+        </nav>
+    </div>
+    
+    <script>
+        // Movie data
+        const topMovies = [
+            { title: "Dune: Part Two", poster: "https://images.unsplash.com/photo-1534447677768-be436bb09401?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" },
+            { title: "The Fall Guy", poster: "https://images.unsplash.com/photo-1595769812725-4c6564f70466?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" },
+            { title: "Kingdom of the Planet", poster: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" },
+            { title: "Furiosa: A Mad Max Saga", poster: "https://images.unsplash.com/photo-1574267432553-4b4628081c31?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" },
+            { title: "Deadpool & Wolverine", poster: "https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" },
+            { title: "Inside Out 2", poster: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" }
+        ];
+        
+        const allFilms = [
+            { title: "Dune: Part Two", poster: "https://images.unsplash.com/photo-1534447677768-be436bb09401?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" },
+            { title: "The Fall Guy", poster: "https://images.unsplash.com/photo-1595769812725-4c6564f70466?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" },
+            { title: "Kingdom of the Planet", poster: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" },
+            { title: "Furiosa: A Mad Max Saga", poster: "https://images.unsplash.com/photo-1574267432553-4b4628081c31?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" },
+            { title: "Ghostbusters: Frozen Empire", poster: "https://images.unsplash.com/photo-1531259683007-016a7b628fc3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" },
+            { title: "Kung Fu Panda 4", poster: "https://images.unsplash.com/photo-1595769812725-4c6564f70466?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" },
+            { title: "Godzilla x Kong", poster: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" },
+            { title: "Civil War", poster: "https://images.unsplash.com/photo-1635805737707-575885ab0820?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" }
+        ];
+        
+        const nowShowing = [
+            { title: "Dune: Part Two", poster: "https://images.unsplash.com/photo-1534447677768-be436bb09401?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" },
+            { title: "The Fall Guy", poster: "https://images.unsplash.com/photo-1595769812725-4c6564f70466?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" },
+            { title: "Kingdom of the Planet", poster: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" },
+            { title: "Furiosa: A Mad Max Saga", poster: "https://images.unsplash.com/photo-1574267432553-4b4628081c31?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" }
+        ];
+        
+        // Populate top movies slider
+        const topMoviesSlider = document.getElementById('topMoviesSlider');
+        
+        topMovies.forEach(movie => {
+            const movieCard = document.createElement('div');
+            movieCard.className = 'top-movie-card';
+            
+            movieCard.innerHTML = `
+                <div class="play-icon-overlay">
+                    <i class="fas fa-play"></i>
+                </div>
+                <img src="${movie.poster}" alt="${movie.title}" class="top-movie-poster">
+                <div class="top-movie-info">
+                    <div class="top-movie-title">${movie.title}</div>
+                </div>
+            `;
+            
+            movieCard.addEventListener('click', function() {
+                alert(`Playing trailer for "${movie.title}"`);
+            });
+            
+            topMoviesSlider.appendChild(movieCard);
+        });
+        
+        // Populate all films grid
+        const allFilmsGrid = document.getElementById('allFilmsGrid');
+        
+        allFilms.forEach(movie => {
+            const filmCard = createFilmCard(movie);
+            allFilmsGrid.appendChild(filmCard);
+        });
+        
+        // Populate now showing grid
+        const nowShowingGrid = document.getElementById('nowShowingGrid');
+        
+        nowShowing.forEach(movie => {
+            const filmCard = createFilmCard(movie);
+            nowShowingGrid.appendChild(filmCard);
+        });
+        
+        // Function to create a film card
+        function createFilmCard(movie) {
+            const filmCard = document.createElement('div');
+            filmCard.className = 'film-card';
+            
+            filmCard.innerHTML = `
+                <div class="film-play-icon">
+                    <i class="fas fa-play"></i>
+                </div>
+                <img src="${movie.poster}" alt="${movie.title}" class="film-poster">
+                <div class="film-info">
+                    <div class="film-title">${movie.title}</div>
+                </div>
+            `;
+            
+            filmCard.addEventListener('click', function() {
+                alert(`Selecting "${movie.title}" for booking\nChoose showtime and seats in the next step.`);
+            });
+            
+            return filmCard;
+        }
+        
+        // Tab switching functionality
+        const tabs = document.querySelectorAll('.tab');
+        const tabContents = document.querySelectorAll('.tab-content');
+        
+        tabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                const tabId = this.getAttribute('data-tab');
+                
+                // Remove active class from all tabs and contents
+                tabs.forEach(t => t.classList.remove('active'));
+                tabContents.forEach(c => c.classList.remove('active'));
+                
+                // Add active class to clicked tab and corresponding content
+                this.classList.add('active');
+                document.getElementById(`${tabId}-content`).classList.add('active');
+            });
+        });
+        
+        // Location selector click
+        document.getElementById('locationSelector').addEventListener('click', function() {
+            alert("Select your preferred cinema location from the list.");
+        });
+        
+        // Notification button click
+        document.querySelector('.notification-btn').addEventListener('click', function() {
+            alert("You have 3 notifications:\n1. Your booking is confirmed\n2. New offer available\n3. Movie reminder for tomorrow");
+        });
+        
+        // Bottom navigation interactions
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Remove active class from all items
+                document.querySelectorAll('.nav-item').forEach(navItem => {
+                    navItem.classList.remove('active');
+                });
+                
+                // Add active class to clicked item
+                this.classList.add('active');
+                
+                // Get page name
+                const page = this.querySelector('span').textContent;
+                
+                // Show alert for demo (except Home)
+                if (page !== "Home") {
+                    alert(`Loading ${page} page...`);
+                }
+            });
+        });
+        
+        // Hero button click
+        document.querySelector('.hero-btn').addEventListener('click', function() {
+            alert("You've claimed the special offer!\nThe discount will be applied at checkout.");
+        });
+    </script>
+</body>
+</html>

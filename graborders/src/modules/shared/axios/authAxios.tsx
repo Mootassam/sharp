@@ -3,8 +3,8 @@ import authToken from "src/modules/auth/authToken";
 
 const authAxios = axios.create({
   // Local link
-  baseURL: "https://thelightscinema.com/api",
-  // baseURL: "http://localhost:8080/api",
+  // baseURL: "https://thelightcareerpathway.com/api",
+  baseURL: "http://localhost:8080/api",
   // baseURL: "http://192.168.1.16:8080/api",
 });
 

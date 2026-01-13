@@ -31,7 +31,6 @@
   justify-content: center;
   max-width: 100%;
 
-  margin-bottom: 60px;
 }
 
 .page__name {
@@ -64,7 +63,7 @@
 }
 
 .active {
-  color: #ca2400 !important;
+  color: #fff !important;
 }
 
 .singleTab {

@@ -21,52 +21,26 @@ img {
   object-fit: contain;
   border-radius: 8px;
 }
+
 .start__ {
   font-size: 54px !important;
 }
 
 body {
-  max-width: 500px;
-/* Make the body cover the full width */
-  background-image: url("/images/home/background.png");
+  min-height: 100dvh;
+  height: 100%;
+  /* Make the body cover the full width */
+  background: radial-gradient(circle at center top, #0a1c3a, #051122 900px, #051122);
   background-position: top;
   background-size: contain;
-  height: 100dvh;
   background-repeat: no-repeat;
   font-family: "Roboto", sans-serif;
   overflow-x: hidden;
-  background-color: #000;
-  margin: auto; /* Remove default margins */
+  margin: auto;
+  /* Remove default margins */
 }
 
 
 p {
   color: rgb(161, 167, 187);
-}
-
-h1,
-h2,
-h3 {
-  color: #fff;
-}
-
-h3 {
-  line-height: 1.5 !important;
-  margin: 0px !important;
-  color: rgb(255, 255, 255) !important;
-  font-weight: 700 !important;
-  font-size: 17px !important;
-  padding-top: 5px;
-}
-
-.p__singledetail {
-  line-height: 1.5 !important;
-  margin: 8px 0px 0px !important;
-  color: rgb(161, 167, 187);
-  font-size: 14px !important;
-}
-
-hr {
-  margin: 15px 0;
-  background-color: #10346e !important;
 }

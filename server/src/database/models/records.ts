@@ -28,6 +28,10 @@ export default (database) => {
         default: "pending",
       },
 
+      rating:{ 
+        type:Number
+      },
+
       date: {
         type: Date,
         default: Dates.getDate(),

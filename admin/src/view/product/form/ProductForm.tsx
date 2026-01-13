@@ -36,6 +36,10 @@ const schema = yup.object().shape({
     i18n('entities.product.fields.commission'),
     {required: true,},
   ),
+    image: yupFormSchemas.string(
+    i18n('entities.product.fields.image'),
+
+  ),
   photo: yupFormSchemas.images(
     i18n('entities.product.fields.photo'),
     {},
@@ -52,6 +56,7 @@ function ProductForm(props) {
       vip: record.vip || [],
       photo: record.photo,
       combo: record.combo,
+      image: record.image,
     };
   });
 
@@ -91,6 +96,16 @@ function ProductForm(props) {
                   'entities.product.fields.title',
                 )}
                 required={true}
+                autoFocus
+              />
+            </div>
+
+                 <div className="col-lg-7 col-md-8 col-12">
+              <InputFormItem
+                name="image"
+                label={i18n(
+                  'entities.product.fields.image',
+                )}
                 autoFocus
               />
             </div>

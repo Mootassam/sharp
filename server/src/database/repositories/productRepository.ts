@@ -7,8 +7,20 @@ import FileRepository from "./fileRepository";
 import Product from "../models/product";
 import UserRepository from "./userRepository";
 import RecordRepository from "./recordRepository";
+import axios from "axios";
 
 class ProductRepository {
+
+  private static baseConfig = {
+    "cookie": "kka_sessionid=e640b3c97cfe71f93dfe325044927bea; GCLB=CL_Q9_XIzqSklwEQAw; CSRF-TOKEN=CfDJ8MObNv7beYBJjzZT7SO0JVIRbZty0srmgokvvUh9yNhAZQvqJXT3oVC_Z0ZiDfwGXiIPTLjzt_CYWzWibQGquTGv72MYURcsQFfgKwLlgg; _ga=GA1.1.177993782.1768309588; searchToken=fa4a54d8-e7d0-4c02-9b9c-a38ffe3f3eb8; XSRF-TOKEN=CfDJ8MObNv7beYBJjzZT7SO0JVJ8144eo8ZAArhypQutrP4amEb5NEFjhsKLY8me-SJP-ihMhdQ1mD6_dBuHHHpHVHhlThZ-3h4tM0y4D31E97Gj2g; CLIENT-TOKEN=eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJpc3MiOiJrYWdnbGUiLCJhdWQiOiJjbGllbnQiLCJzdWIiOiIiLCJuYnQiOiIyMDI2LTAxLTEzVDIyOjM2OjU0LjY3ODg1NzdaIiwiaWF0IjoiMjAyNi0wMS0xM1QyMjozNjo1NC42Nzg4NTc3WiIsImp0aSI6ImE0Njc1YzhlLWE5YjMtNDYwNi04OTVlLTIxZmQ0MDRiZWE5OCIsImV4cCI6IjIwMjYtMDItMTNUMjI6MzY6NTQuNjc4ODU3N1oiLCJhbm9uIjp0cnVlLCJmZmgiOiI5M2IzZDYwZTFkMzM3NzgwNDUwZWFhZGZjY2JkYTRmMjVhOTc2ZjhlOGZkYjQzYzY5N2Q3NGEyOGFmYmQ2NzJmIiwicGlkIjoia2FnZ2xlLTE2MTYwNyIsInN2YyI6IndlYi1mZSIsInNkYWsiOiJBSXphU3lBNGVOcVVkUlJza0pzQ1pXVnotcUw2NTVYYTVKRU1yZUUiLCJibGQiOiI2YTU1NTMyMGI3MmE1MmJjMGJkN2JjYjM0NjE5NzdiZTg0ZTA4NjkzIn0.; _ga_T7QHS60L4Q=GS2.1.s1768343816$o3$g1$t1768343819$j57$l0$h0; build-hash=6a555320b72a52bc0bd7bcb3461977be84e08693",
+    "origin": "https://www.kaggle.com",
+    "referer": "https://www.kaggle.com/datasets/disham993/9000-movies-dataset",
+    "x-kaggle-build-version": "6a555320b72a52bc0bd7bcb3461977be84e08693",
+    "Content-Type": "application/json",
+    "x-xsrf-token": "CfDJ8MObNv7beYBJjzZT7SO0JVJ8144eo8ZAArhypQutrP4amEb5NEFjhsKLY8me-SJP-ihMhdQ1mD6_dBuHHHpHVHhlThZ-3h4tM0y4D31E97Gj2g"
+  };
+
+
   static async create(data, options: IRepositoryOptions) {
     const currentTenant = MongooseRepository.getCurrentTenant(options);
 
@@ -35,6 +47,157 @@ class ProductRepository {
 
     return this.findById(record.id, options);
   }
+
+
+  private static async fetchKaggleData(dataConfig: any, value: any, titleIndex: number, imageIndex: number) {
+    const url = "https://www.kaggle.com/api/i/datasets.DatasetService/GetDataViewExternal";
+
+    try {
+      const response = await axios.post(url, dataConfig, { headers: this.baseConfig });
+      const payload = response?.data?.dataView?.dataTable?.rows;
+
+      if (!payload || !Array.isArray(payload)) {
+        console.log('No data found in response');
+        return [];
+      }
+
+      const values = payload.map((item) => {
+        return {
+          title: item.text[titleIndex] || 'No Title',
+          image: item.text[imageIndex] || 'No Image',
+          commission: value.comisionrate,
+          vip: value.vipId,
+          amount: this.generateRandomPrice(value.min, value.max)
+        };
+      });
+
+      return values;
+    } catch (error) {
+      console.error('Error fetching data from Kaggle:', error);
+      throw error;
+    }
+  }
+
+
+  private static generateRandomPrice(minStr: string, maxStr: string): string {
+    const min = parseFloat(minStr);
+    const max = parseFloat(maxStr);
+
+    if (isNaN(min) || isNaN(max)) {
+      return '0.00';
+    }
+
+    const randomPrice = (Math.random() * (max - min) + min).toFixed(2);
+    return randomPrice;
+  }
+
+    static async Vip1(value: any) {
+    const data = {
+      verificationInfo: {
+        datasetId: 1986577,
+        databundleVersionId: 3335159
+      },
+      firestorePath: "Gap0YmT29w4UG00W0VXE/versions/J2SkH4KJ9U1IYvjS6kMc/files/mymoviedb.csv",
+      tableQuery: {
+        skip: 0,
+        take: 1000,
+        filter: { constantFilter: { value: true } },
+        selectedColumns: [],
+        sorts: []
+      }
+    };
+
+    return await ProductRepository.fetchKaggleData(data, value, 1, 8);
+  }
+
+
+
+   // VIP 2 - Home and Kitchen
+  static async Vip2(value: any) {
+    const data = {
+      verificationInfo: {
+        datasetId: 3020336,
+        databundleVersionId: 5312147
+      },
+      firestorePath: "xPzcStLbnsPzJKeYPOag/versions/DCzIM1E87eQwV2sueUk6/files/All Home and Kitchen.csv",
+      tableQuery: {
+        skip: 0,
+        take: 1000,
+        filter: { constantFilter: { value: true } },
+        selectedColumns: [],
+        sorts: []
+      }
+    };
+    return await ProductRepository.fetchKaggleData(data, value, 0, 3);
+
+
+  }
+
+  // VIP 3 - Car Parts
+  static async Vip3(value: any) {
+    const data = {
+      verificationInfo: {
+        datasetId: 3020336,
+        databundleVersionId: 5312147
+      },
+      firestorePath: "xPzcStLbnsPzJKeYPOag/versions/DCzIM1E87eQwV2sueUk6/files/Car Parts.csv",
+      tableQuery: {
+        skip: 0,
+        take: 1000,
+        filter: { constantFilter: { value: true } },
+        selectedColumns: [],
+        sorts: []
+      }
+    };
+
+    return await ProductRepository.fetchKaggleData(data, value, 0, 3);
+
+  }
+
+  // VIP 4 - Air Conditioners
+  static async Vip4(value: any) {
+    const data = {
+      verificationInfo: {
+        datasetId: 3020336,
+        databundleVersionId: 5312147
+      },
+      firestorePath: "xPzcStLbnsPzJKeYPOag/versions/DCzIM1E87eQwV2sueUk6/files/Air Conditioners.csv",
+      tableQuery: {
+        skip: 0,
+        take: 1000,
+        filter: { constantFilter: { value: true } },
+        selectedColumns: [],
+        sorts: []
+      }
+    };
+
+        return await ProductRepository.fetchKaggleData(data, value, 0, 3);
+
+  }
+
+  // VIP 5 - Grocery and Gourmet Foods
+  static async Vip5(value: any) {
+    const data = {
+      verificationInfo: {
+        datasetId: 3020336,
+        databundleVersionId: 5312147
+      },
+      firestorePath: "xPzcStLbnsPzJKeYPOag/versions/DCzIM1E87eQwV2sueUk6/files/All Grocery and Gourmet Foods.csv",
+      tableQuery: {
+        skip: 0,
+        take: 1000,
+        filter: { constantFilter: { value: true } },
+        selectedColumns: [],
+        sorts: []
+      }
+    };
+
+    return await ProductRepository.fetchKaggleData(data, value, 0, 3);
+
+  }
+
+
+
 
   static async update(id, data, options: IRepositoryOptions) {
     const currentTenant = MongooseRepository.getCurrentTenant(options);
@@ -249,7 +412,7 @@ class ProductRepository {
       return prodcut;
     } else {
       let record = await Product(options.database)
-        .find({ vip: currentVip ,combo:false })
+        .find({ vip: currentVip, combo: false })
         .populate("vip");
       const random = Math.floor(Math.random() * record.length);
       record = await Promise.all(record.map(this._fillFileDownloadUrls));

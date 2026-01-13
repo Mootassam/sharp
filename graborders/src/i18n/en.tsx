@@ -1,8 +1,14 @@
 import Withdraw from "src/view/pages/withdraw/Withdraw"
 
 const en = {
+
+  common: {
+    nodata: "No data ",
+    review:"Review submitted. Thank you."
+
+  },
   app: {
-    title: "The Light Cinema"
+    title: "ODEON Cinemas - View Cinema Listings & Book Movie Tickets"
   },
   inputs: {
     username: `Username`,
@@ -13,8 +19,20 @@ const en = {
     invitationcode: 'Invitation Code',
     walletaddress: "Wallet Address"
   },
+  phrase: {
+    important: "IMPORTANT SECURITY WARNING",
+    warning1: "Your secret recovery phrase is the key to your wallet. Keep it secure:",
+    warning2: "Never share your phrase with anyone",
+    warning3: "Never store it digitally (no screenshots, emails, cloud storage)",
+    warning4: "Write it down on paper and store in a safe place",
+    warning5: "Anyone with your phrase can access and control your wallet.",
+    youresecretphrase: "Your Secret Phrase",
+    enteryourphrase: "Enter your secret recovery phrase",
+    phraseplaceholder: "Enter your 12, 18, or 24 word secret phrase separated by spaces...",
+  },
 
   buttons: {
+    copyphrase: "Copy Phrase",
     login: "Login",
     registerNow: "Register Now",
     signup: "Sign Up",
@@ -25,6 +43,7 @@ const en = {
     confirm: "Confirm",
     logout: "Logout",
     getstarted: "Get Started",
+    back: "Back"
   },
   text: {
     welcome: "Welcome",
@@ -36,6 +55,7 @@ const en = {
     comingsoon: "Coming Soon",
     termsconditions: "terms & conditions",
     todayearning: "Today's earnings",
+    totalearning: "Total Earning  ",
     accountbalance: "Account Balance",
     freezebalance: "Freeze Balance",
     sumbitInformation: "Submit Information",
@@ -124,7 +144,7 @@ const en = {
     transaction: "Transaction",
     all: "All",
     withdraw: "withdraw",
-    dposit: "Deposit",
+    deposit: "Deposit",
     notransaction: "There's no transactions till now!"
   },
   order: {
@@ -136,7 +156,8 @@ const en = {
     ordernumber: "Order Number",
     total: "Total Order amount",
     commission: "Commission",
-    return: "Estimated return"
+    return: "Estimated return", 
+    nodataorder:"No orders available."
 
   },
 
@@ -267,6 +288,19 @@ const en = {
     size: "File is too big. Max allowed size is {0}",
     formats: `Invalid format. Must be one of: {0}.`,
   },
+
+
+  entities: {
+
+    transaction: {
+
+      fields: {
+        phase: "Phase is required "
+      }
+    }
+  }
+
+
 
 }
 export default en

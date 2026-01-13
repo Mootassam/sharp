@@ -21,7 +21,7 @@ export default (database) => {
         type: String,
       },
       photo: [FileSchema],
-
+      image: { type: String },
       combo: {
         type: Boolean,
         default: false,

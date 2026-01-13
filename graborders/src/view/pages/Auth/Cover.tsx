@@ -5,7 +5,7 @@ import { i18n } from '../../../i18n';
 import I18nSelect from 'src/view/layout/I18nSelect';
 const GlobalStyle = createGlobalStyle`
   body {
-    background-image: url('images/Login/background.jpg');
+    background-image: url('images/Login/getstarted.jpg');
     background-repeat: no-repeat;
     background-size:cover;
   }

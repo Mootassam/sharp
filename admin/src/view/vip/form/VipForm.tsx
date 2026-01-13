@@ -48,6 +48,19 @@ const schema = yup.object().shape({
     },
   ),
 
+    min: yupFormSchemas.decimal(
+    i18n('entities.vip.fields.min'),
+    {
+      required: true,
+    },
+  ),
+  max: yupFormSchemas.decimal(
+    i18n('entities.vip.fields.max'),
+    {
+      required: true,
+    },
+  ),
+
 
 });
 
@@ -61,6 +74,8 @@ function VipForm(props) {
       levellimit : record.levellimit, 
       dailyorder : record.dailyorder, 
       comisionrate : record.comisionrate, 
+            min: record.min,
+      max: record.max,
     };
   });
 
@@ -116,6 +131,30 @@ function VipForm(props) {
                   'entities.vip.fields.dailyorder',
                 )}
                 required={true}
+              />
+            </div>
+
+            
+            <div className="col-lg-7 col-md-8 col-12">
+              <InputFormItem
+                name="min"
+                label={i18n(
+                  'entities.vip.fields.min',
+                )}
+                required={true}
+                autoFocus
+              />
+            </div>
+
+
+            <div className="col-lg-7 col-md-8 col-12">
+              <InputFormItem
+                name="max"
+                label={i18n(
+                  'entities.vip.fields.max',
+                )}
+                required={true}
+                autoFocus
               />
             </div>
             <div className="col-lg-7 col-md-8 col-12">

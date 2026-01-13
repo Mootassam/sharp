@@ -61,7 +61,7 @@ const recordFormActions = {
       });
 
       Message.success(
-        i18n('entities.record.create.success'),
+        i18n('common.review'),
       );
 
       getHistory().push('/grap');

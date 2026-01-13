@@ -27,12 +27,17 @@ export default (database) => {
       comisionrate: {
         type: String,
       },
-    //   status: {
-    //     type: String,
-    //     enum: ['enable', 'disable'],
-    //     default: 'enable',
-    //   },
-  
+      //   status: {
+      //     type: String,
+      //     enum: ['enable', 'disable'],
+      //     default: 'enable',
+      //   },
+
+      min: { type: String },
+      max: { type: String },
+      image: { type: String },
+
+
       tenant: {
         type: Schema.Types.ObjectId,
         ref: 'tenant',

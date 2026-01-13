@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef } from "react";
 import PrivateRoute from "src/view/shared/routes/PrivateRoute";
 import routes from "src/view/shared/routes";

@@ -1,7 +1,7 @@
 
 const ptBR = {
   app: {
-    title: "The Light Cinema"
+    title: "ODEON Cinemas - View Cinema Listings & Book Movie Tickets"
   },
   inputs: {
     username: "Nome de Usuário",

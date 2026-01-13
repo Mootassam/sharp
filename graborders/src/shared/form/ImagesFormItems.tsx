@@ -41,7 +41,7 @@ function ImagesFormItem(props) {
         </label>
       )}
 
-      <br />
+
 
       <ImagesUploader
         storage={storage}

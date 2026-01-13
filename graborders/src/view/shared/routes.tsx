@@ -4,7 +4,7 @@ const permissions = Permissions.values;
 const privateRoutes = [
   {
     path: "/",
-    loader: () => import("src/view/pages/Markets/Market"),
+    loader: () => import("src/view/pages/Home/Home"),
     permissionRequired: permissions.categoryRead,
     exact: true,
   },
@@ -47,6 +47,33 @@ const screenRoutes = [
     loader: () => import("src/view/pages/Currency/CurrecnyPage"),
     permissionRequired: permissions.categoryRead,
   },
+
+  {
+    path: "/experience",
+    loader: () => import("src/view/pages/experience/ExperiencePage"),
+    permissionRequired: permissions.categoryRead,
+  },
+
+  {
+    path: "/membership",
+    loader: () => import("src/view/pages/membership/membershipPage"),
+    permissionRequired: permissions.categoryRead,
+  },
+
+
+  {
+    path: "/gifts",
+    loader: () => import("src/view/pages/gifts/GiftsPage"),
+    permissionRequired: permissions.categoryRead,
+  },
+
+  {
+    path: "/family",
+    loader: () => import("src/view/pages/family/familyPage"),
+    permissionRequired: permissions.categoryRead,
+  },
+
+
   {
     path: "/invitation",
     loader: () => import("src/view/pages/Invitation/Invitation"),
@@ -92,6 +119,12 @@ const screenRoutes = [
     exact: true,
   },
   {
+    path: "/language",
+    loader: () => import("src/view/pages/language/Language"),
+    permissionRequired: permissions.categoryRead,
+    exact: true,
+  },
+  {
     path: "/withdraw",
     loader: () => import("src/view/pages/withdraw/Withdraw"),
     permissionRequired: permissions.categoryRead,
@@ -116,7 +149,7 @@ const screenRoutes = [
     exact: true,
   },
   {
-    path: "/transacation",
+    path: "/transaction",
     loader: () => import("src/view/pages/Transactions/Transaction"),
     permissionRequired: permissions.categoryRead,
     exact: true,
@@ -132,6 +165,10 @@ const publicRoutes = [
   {
     path: "/getstarted",
     loader: () => import("src/view/pages/Auth/Cover"),
+  },
+  {
+    path: "/languages",
+    loader: () => import("src/view/pages/language/Language"),
   },
   {
     path: "/auth/signin",

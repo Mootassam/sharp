@@ -27,10 +27,10 @@ export function InputFormItem(props) {
     formState: { touched, isSubmitted },
   } = useFormContext();
 
-
-  if(  externalErrorMessage) {
-    Message.error(  externalErrorMessage,)
+  if (externalErrorMessage) {
+    Message.error(externalErrorMessage);
   }
+  
   const errorMessage = FormErrors.errorMessage(
     name,
     errors,
@@ -39,55 +39,199 @@ export function InputFormItem(props) {
   );
 
   return (
-    <div className="form-group">
-      <div className={endAdornment ? 'input-group' : ''}>
+    <>
+      <style>
+        {`
+          .input-form-item {
+            margin-bottom: 18px;
+            width: 100%;
+          }
+          
+          .input-label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 6px;
+            line-height: 1.3;
+          }
+          
+          .input-label.required:after {
+            content: ' *';
+            color: #ff416c;
+          }
+          
+          .input-wrapper {
+            position: relative;
+            width: 100%;
+          }
+          
+          .input-field {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 8px;
+            padding: 11px 14px;
+            font-size: 0.95rem;
+            color: white;
+            transition: all 0.2s ease;
+            outline: none;
+            font-family: inherit;
+          }
+          
+          .input-field:focus {
+            border-color: #00c6ff;
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 0 2px rgba(0, 198, 255, 0.1);
+          }
+          
+          .input-field.__danger {
+            border-color: #ff416c;
+            background: rgba(255, 65, 108, 0.05);
+          }
+          
+          .input-field.__danger:focus {
+            border-color: #ff416c;
+            box-shadow: 0 0 0 2px rgba(255, 65, 108, 0.1);
+          }
+          
+          .input-field:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            background: rgba(255, 255, 255, 0.04);
+          }
+          
+          .input-field::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+          }
+          
+          .input-with-adornment {
+            display: flex;
+            align-items: center;
+          }
+          
+          .input-field.has-adornment {
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+            border-right: none;
+            flex: 1;
+          }
+          
+          .input-adornment {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-left: none;
+            border-top-right-radius: 8px;
+            border-bottom-right-radius: 8px;
+            padding: 11px 14px;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 44px;
+          }
+          
+          .input-adornment.__danger {
+            border-color: #ff416c;
+            background: rgba(255, 65, 108, 0.05);
+          }
+          
+          .error-message {
+            color: #ff416c;
+            font-size: 0.8rem;
+            margin-top: 5px;
+            display: block;
+            line-height: 1.3;
+          }
+          
+          .input-hint {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.8rem;
+            margin-top: 5px;
+            display: block;
+            line-height: 1.3;
+          }
+          
+          .input-description {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.85rem;
+            margin-bottom: 8px;
+            line-height: 1.3;
+          }
+        `}
+      </style>
+
+      <div className="input-form-item">
         {Boolean(label) && (
           <label
-            className={`col-form-label ${
-              required ? 'required' : null
-            }`}
+            className={`input-label ${required ? 'required' : ''}`}
             htmlFor={name}
           >
             {label}
           </label>
         )}
-        {description}
-        <input
-         className={`${props.className} ${
-          errorMessage ? '__danger' : ''
-        }`}
-          id={name}
-          name={name}
-          type={type}
-          ref={register}
-          onChange={(event) => {
-            props.onChange &&
-              props.onChange(event.target.value);
-          }}
-          onBlur={(event) => {
-            props.onBlur && props.onBlur(event);
-          }}
-          placeholder={placeholder || undefined}
-          autoFocus={autoFocus || undefined}
-          autoComplete={autoComplete || undefined}
-          disabled={disabled}
         
-        />
-        {endAdornment && (
-          <div className="input-group-append">
-            <span className="input-group-text">
-              {endAdornment}
-            </span>
-          </div>
+        {description && (
+          <div className="input-description">{description}</div>
+        )}
+        
+        <div className="input-wrapper">
+          {endAdornment ? (
+            <div className="input-with-adornment">
+              <input
+                className={`input-field has-adornment ${
+                  errorMessage ? '__danger' : ''
+                } ${className || ''}`}
+                id={name}
+                name={name}
+                type={type}
+                ref={register}
+                onChange={(event) => {
+                  props.onChange && props.onChange(event.target.value);
+                }}
+                onBlur={(event) => {
+                  props.onBlur && props.onBlur(event);
+                }}
+                placeholder={placeholder || undefined}
+                autoFocus={autoFocus || undefined}
+                autoComplete={autoComplete || undefined}
+                disabled={disabled}
+              />
+              <div className={`input-adornment ${errorMessage ? '__danger' : ''}`}>
+                {endAdornment}
+              </div>
+            </div>
+          ) : (
+            <input
+              className={`input-field ${errorMessage ? '__danger' : ''} ${className || ''}`}
+              id={name}
+              name={name}
+              type={type}
+              ref={register}
+              onChange={(event) => {
+                props.onChange && props.onChange(event.target.value);
+              }}
+              onBlur={(event) => {
+                props.onBlur && props.onBlur(event);
+              }}
+              placeholder={placeholder || undefined}
+              autoFocus={autoFocus || undefined}
+              autoComplete={autoComplete || undefined}
+              disabled={disabled}
+            />
+          )}
+        </div>
+        
+        {errorMessage && (
+          <span className="error-message">{errorMessage}</span>
+        )}
+        
+        {Boolean(hint) && !errorMessage && (
+          <span className="input-hint">{hint}</span>
         )}
       </div>
-      <div className="invalid-feedback">{errorMessage}</div>
-      {Boolean(hint) && (
-        <small className="form-text text-muted">
-          {hint}
-        </small>
-      )}
-    </div>
+    </>
   );
 }
 
@@ -111,7 +255,7 @@ InputFormItem.propTypes = {
   externalErrorMessage: PropTypes.string,
   endAdornment: PropTypes.any,
   onChange: PropTypes.any,
-  className : PropTypes.string,
+  className: PropTypes.string,
 };
 
 export default InputFormItem;
