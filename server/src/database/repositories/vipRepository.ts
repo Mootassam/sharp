@@ -6,6 +6,7 @@ import { IRepositoryOptions } from "./IRepositoryOptions";
 import FileRepository from "./fileRepository";
 import Vip from "../models/vip";
 import ProductRepository from "./productRepository";
+import Product from "../models/product";
 
 class VipRepository {
     static async create(data, options: IRepositoryOptions) {
@@ -72,7 +73,7 @@ class VipRepository {
     return this.findById(record.id, options);
   }
 
-  static async update(id, data, options: IRepositoryOptions) {
+   static async update(id, data, options: IRepositoryOptions) {
     const currentTenant = MongooseRepository.getCurrentTenant(options);
 
     let record = await MongooseRepository.wrapWithSessionIfExists(
@@ -84,6 +85,12 @@ class VipRepository {
       throw new Error404();
     }
 
+    // Check if min or max values are being updated
+    const minChanged = data.min !== undefined && data.min !== record.min;
+    const maxChanged = data.max !== undefined && data.max !== record.max;
+    const priceRangeChanged = minChanged || maxChanged;
+
+    // Update the VIP record
     await Vip(options.database).updateOne(
       { _id: id },
       {
@@ -92,6 +99,15 @@ class VipRepository {
       },
       options
     );
+
+    // If price range changed, update all products for this VIP
+    if (priceRangeChanged) {
+      // Use the new values if provided, otherwise use the existing ones
+      const finalMin = data.min !== undefined ? data.min : record.min;
+      const finalMax = data.max !== undefined ? data.max : record.max;
+
+      await this.updateProductPricesForVip(id, finalMin, finalMax, options);
+    }
 
     await this._createAuditLog(AuditLogRepository.UPDATE, id, data, options);
 
@@ -143,6 +159,67 @@ class VipRepository {
 
     return this._fillFileDownloadUrls(record);
   }
+  static async updateProductPricesForVip(vipId, newMin, newMax, options: IRepositoryOptions) {
+    try {
+
+      // Find all products for this VIP - await the query and wrap with session if exists
+      const products = await MongooseRepository.wrapWithSessionIfExists(
+        Product(options.database).find({ vip: vipId }),
+        options
+      );
+
+      if (!products || products.length === 0) {
+        console.log(`No products found for VIP ${vipId}`);
+        return;
+      }
+
+      console.log(`Found ${products.length} products for VIP ${vipId}`);
+
+      // Update each product with new random price based on new range
+      const updatePromises = products.map(async (product) => {
+        const newPrice = await this.generateRandomPriceForProduct(newMin, newMax);
+
+        return Product(options.database).updateOne(
+          { _id: product._id },
+          {
+            amount: newPrice,
+            updatedBy: MongooseRepository.getCurrentUser(options).id
+          },
+          options
+        );
+      });
+
+      await Promise.all(updatePromises);
+
+      console.log(`Updated ${products.length} products for VIP ${vipId} with new price range: ${newMin}-${newMax}`);
+
+    } catch (error) {
+      console.error(`Error updating product prices for VIP ${vipId}:`, error);
+      throw error;
+    }
+  }
+
+
+    /**
+   * Generate random price for product based on min/max range
+   */
+  static async generateRandomPriceForProduct(minStr, maxStr) {
+    const min = parseFloat(minStr);
+    const max = parseFloat(maxStr);
+
+    if (isNaN(min) || isNaN(max)) {
+      throw new Error('Invalid min or max values for price generation');
+    }
+
+    // Ensure min is not greater than max
+    const actualMin = Math.min(min, max);
+    const actualMax = Math.max(min, max);
+
+    const randomPrice = (Math.random() * (actualMax - actualMin) + actualMin).toFixed(2);
+    return randomPrice;
+  }
+
+
 
   static async findAndCountAll(
     { filter, limit = 0, offset = 0, orderBy = "" },
