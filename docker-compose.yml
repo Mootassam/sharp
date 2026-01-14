@@ -34,18 +34,18 @@ services:
       - CHOKIDAR_USEPOLLING=true
 
   # Uncomment this block if you want to include the graborders service
-  # web1:
-  #   build: ./graborders
-  #   image: sharp_web1:latest
-  #   ports:
-  #     - 3015:80
-  #   restart: unless-stopped
-  #   volumes:
-  #     - "./graborders:/app"
-  #     - "/app/node_modules"
-  #   stdin_open: true
-  #   environment:
-  #     - CHOKIDAR_USEPOLLING=true
+  web1:
+    build: ./graborders
+    image: sharp_web1:latest
+    ports:
+      - 3015:80
+    restart: unless-stopped
+    volumes:
+      - "./graborders:/app"
+      - "/app/node_modules"
+    stdin_open: true
+    environment:
+      - CHOKIDAR_USEPOLLING=true
 
 volumes:
   phone:
