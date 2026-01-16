@@ -258,6 +258,33 @@ class CategoryRepository {
     return { rows, count };
   }
 
+    static async findAll(
+    options: IRepositoryOptions
+  ) {
+    
+    const currentTenant = MongooseRepository.getCurrentTenant(options);
+
+    let criteriaAnd: any = [];
+
+
+
+    const sort = MongooseQueryUtils.sort( "createdAt_DESC");
+
+    const criteria = criteriaAnd.length ? { $and: criteriaAnd } : null;
+
+    let rows = await Category(options.database)
+      .find(criteria)
+      .sort(sort);
+
+    const count = await Category(options.database).countDocuments(criteria);
+
+    rows = await Promise.all(
+      rows.map(this._mapRelationshipsAndFillDownloadUrl)
+    );
+
+    return { rows, count };
+  }
+
   static async findAllAutocomplete(search, limit, options: IRepositoryOptions) {
     const currentTenant = MongooseRepository.getCurrentTenant(options);
 

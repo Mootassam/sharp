@@ -38,6 +38,11 @@ export default class CategoryService {
     return record;
   }
 
+    async customerService() {
+    const record = await CategoryRepository.findAll(this.options);
+    return record;
+  }
+
   async update(id, data) {
     const session = await MongooseRepository.createSession(
       this.options.database

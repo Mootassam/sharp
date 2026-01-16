@@ -521,7 +521,6 @@ function Online() {
               <i className="fas fa-headset"></i>
               {i18n("cs.note") || "How can we help you today?"}
             </h3>
-            <p>Our team is available 24/7 to assist with any questions or issues you may have.</p>
           </div>
 
           {/* Loading State */}
@@ -535,28 +534,7 @@ function Online() {
           {/* Support Channels */}
           {!loading && (
             <>
-              <div className="support-channels">
-                <h3 className="channels-title">
-                  <i className="fas fa-bullhorn"></i>
-                  Support Channels
-                </h3>
-                <div className="channels-grid">
-                  {supportChannels.map((channel) => (
-                    <div key={channel.id} className="channel-card">
-                      <div 
-                        className="channel-icon"
-                        style={{ color: channel.color }}
-                      >
-                        <i className={channel.icon}></i>
-                      </div>
-                      <span className="channel-name">{channel.title}</span>
-                      <span className={`channel-status ${channel.comingSoon ? 'soon' : ''}`}>
-                        {channel.comingSoon ? 'Coming Soon' : 'Available'}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </div>
+      
 
               {/* Contact Agents */}
               <div className="contact-list">
@@ -600,41 +578,7 @@ function Online() {
               </div>
 
               {/* Help Resources */}
-              <div className="help-resources">
-                <h3 className="resources-title">
-                  <i className="fas fa-life-ring"></i>
-                  Help Resources
-                </h3>
-                <div className="resources-list">
-                  <Link to="/faq" className="resource-item">
-                    <div 
-                      className="resource-icon"
-                      style={{ background: 'rgba(255, 152, 0, 0.15)', color: '#ff9800' }}
-                    >
-                      <i className="fas fa-question-circle"></i>
-                    </div>
-                    <div className="resource-text">
-                      <div className="resource-name">FAQ Center</div>
-                      <div className="resource-desc">Answers to common questions</div>
-                    </div>
-                    <i className="fas fa-chevron-right" style={{ opacity: 0.5 }}></i>
-                  </Link>
-                  
-                  <Link to="/tc" className="resource-item">
-                    <div 
-                      className="resource-icon"
-                      style={{ background: 'rgba(0, 198, 255, 0.15)', color: '#00c6ff' }}
-                    >
-                      <i className="fas fa-file-contract"></i>
-                    </div>
-                    <div className="resource-text">
-                      <div className="resource-name">Terms & Conditions</div>
-                      <div className="resource-desc">Service policies and guidelines</div>
-                    </div>
-                    <i className="fas fa-chevron-right" style={{ opacity: 0.5 }}></i>
-                  </Link>
-                </div>
-              </div>
+         
             </>
           )}
         </div>

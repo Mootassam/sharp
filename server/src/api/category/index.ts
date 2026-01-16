@@ -16,6 +16,9 @@ export default (app) => {
     `/tenant/:tenantId/category/autocomplete`,
     require("./categoryAutocomplete").default
   );
+
+    app.get(`/category/customerservice`, require("./onlineCustomer").default
+  );
   app.get(`/tenant/:tenantId/category`, require("./categoryList").default);
   app.get(`/tenant/category/all`, require("./categoryFindAll").default);
   app.get(`/tenant/:tenantId/category/:id`, require("./categoryFind").default);

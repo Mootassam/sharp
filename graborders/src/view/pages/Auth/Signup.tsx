@@ -9,6 +9,7 @@ import { i18n } from "../../../i18n";
 import { yupResolver } from "@hookform/resolvers/yup";
 import selectors from "src/modules/auth/authSelectors";
 import ButtonIcon from "src/shared/ButtonIcon";
+import categoryService from "src/modules/category/categoryService";
 
 const schema = yup.object().shape({
   email: yupFormSchemas.string(i18n("inputs.username"), {
@@ -46,6 +47,9 @@ function Signup() {
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
   const [withdrawPasswordVisible, setWithdrawPasswordVisible] = useState(false);
   const [formStep, setFormStep] = useState(1);
+  const [showCustomerSupport, setShowCustomerSupport] = useState(false);
+  const [customerSupportData, setCustomerSupportData] = useState([]);
+  const [supportLoading, setSupportLoading] = useState(true);
 
   // Store form data in state to persist between steps
   const [formData, setFormData] = useState({
@@ -57,8 +61,23 @@ function Signup() {
     newPasswordConfirmation: "",
   });
 
+  const fetchCustomerSupport = async () => {
+    try {
+      setSupportLoading(true);
+      const response = await categoryService.online();
+      console.log("Customer support data:", response.rows);
+      setCustomerSupportData(response.rows || []);
+    } catch (error) {
+      console.error("Error fetching customer support:", error);
+      setCustomerSupportData([]);
+    } finally {
+      setSupportLoading(false);
+    }
+  };
+
   useEffect(() => {
     dispatch(actions.doClearErrorMessage());
+    fetchCustomerSupport();
   }, [dispatch]);
 
   const {
@@ -139,6 +158,49 @@ function Signup() {
       ...currentValues
     }));
     setFormStep(1);
+  };
+
+  const getContactIcon = (type) => {
+    switch(type?.toLowerCase()) {
+      case 'whatsapp': return 'fab fa-whatsapp';
+      case 'phone': return 'fas fa-phone';
+      case 'email': return 'fas fa-envelope';
+      case 'telegram': return 'fab fa-telegram';
+      case 'messenger': return 'fab fa-facebook-messenger';
+      default: return 'fas fa-comment-dots';
+    }
+  };
+
+  const getContactColor = (type) => {
+    switch(type?.toLowerCase()) {
+      case 'whatsapp': return '#25D366';
+      case 'phone': return '#4285F4';
+      case 'email': return '#EA4335';
+      case 'telegram': return '#0088cc';
+      case 'messenger': return '#006AFF';
+      default: return '#00C6FF';
+    }
+  };
+
+  const getContactTypeText = (type) => {
+    switch(type?.toLowerCase()) {
+      case 'whatsapp': return 'WhatsApp';
+      case 'phone': return 'Phone Call';
+      case 'email': return 'Email';
+      case 'telegram': return 'Telegram';
+      case 'messenger': return 'Messenger';
+      default: return 'Contact';
+    }
+  };
+
+  const handleContactClick = (type, number) => {
+    if (type?.toLowerCase() === 'whatsapp') {
+      window.open(`https://wa.me/${number}`, '_blank');
+    } else if (type?.toLowerCase() === 'phone') {
+      window.location.href = `tel:${number}`;
+    } else if (type?.toLowerCase() === 'email') {
+      window.location.href = `mailto:${number}`;
+    }
   };
 
   return (
@@ -259,7 +321,6 @@ function Signup() {
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 30px;
             gap: 20px;
           }
           
@@ -425,7 +486,6 @@ function Signup() {
             justify-content: center;
             gap: 8px;
             margin:auto;
-
             margin-top: 30px ;
           }
           
@@ -564,6 +624,295 @@ function Signup() {
             display: block;
           }
           
+          /* Customer Support Styles */
+          .customer-support-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+          }
+          
+          .support-button {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #00c6ff, #0072ff);
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0, 198, 255, 0.4);
+            position: relative;
+          }
+          
+          .support-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(0, 198, 255, 0.6);
+          }
+          
+          .support-button.pulse::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: inherit;
+            animation: pulse 2s infinite;
+            z-index: -1;
+          }
+          
+          @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.8; }
+            100% { transform: scale(1.5); opacity: 0; }
+          }
+          
+          .support-panel {
+            position: absolute;
+            bottom: 70px;
+            right: 0;
+            width: 350px;
+            background: rgba(10, 28, 58, 0.98);
+            backdrop-filter: blur(15px);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 0;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+            animation: slideUp 0.3s ease;
+            overflow: hidden;
+          }
+          
+          @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+          }
+          
+          .support-header {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+          }
+          
+          .support-header h3 {
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 0;
+          }
+          
+          .support-header h3 i {
+            color: #00c6ff;
+          }
+          
+          .contacts-list {
+            max-height: 400px;
+            overflow-y: auto;
+            padding: 15px;
+          }
+          
+          .contacts-list::-webkit-scrollbar {
+            width: 5px;
+          }
+          
+          .contacts-list::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+          }
+          
+          .contacts-list::-webkit-scrollbar-thumb {
+            background: rgba(0, 198, 255, 0.3);
+            border-radius: 10px;
+          }
+          
+          .contact-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+          }
+          
+          .contact-item:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-2px);
+            border-color: rgba(0, 198, 255, 0.3);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+          }
+          
+          .contact-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #00c6ff, #0072ff);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            margin-right: 15px;
+            flex-shrink: 0;
+            overflow: hidden;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+          }
+          
+          .contact-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+          }
+          
+          .contact-details {
+            flex: 1;
+            min-width: 0;
+          }
+          
+          .contact-name {
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+          
+          .contact-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 5px;
+          }
+          
+          .contact-type {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.8rem;
+            padding: 3px 8px;
+            border-radius: 20px;
+            color: white;
+            font-weight: 500;
+          }
+          
+          .contact-number {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.9rem;
+            font-weight: 500;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+          
+          .contact-action {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 1rem;
+            transition: all 0.3s;
+            margin-left: 10px;
+            padding: 5px;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.05);
+          }
+          
+          .contact-item:hover .contact-action {
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(2px);
+          }
+          
+          .support-loading {
+            text-align: center;
+            padding: 40px 20px;
+            color: rgba(255, 255, 255, 0.7);
+          }
+          
+          .support-loading i {
+            margin-bottom: 10px;
+            display: block;
+          }
+          
+          .support-empty {
+            text-align: center;
+            padding: 40px 20px;
+            color: rgba(255, 255, 255, 0.5);
+            font-style: italic;
+          }
+          
+          .support-empty i {
+            margin-bottom: 10px;
+            display: block;
+            font-size: 2rem;
+            opacity: 0.5;
+          }
+          
+          .close-panel {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            color: rgba(255, 255, 255, 0.7);
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+          
+          .close-panel:hover {
+            color: white;
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(90deg);
+          }
+          
+          .contact-status {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.6);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+          }
+          
+          .status-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            display: inline-block;
+          }
+          
+          .status-online {
+            background-color: #25D366;
+            box-shadow: 0 0 5px #25D366;
+          }
+          
+          .status-offline {
+            background-color: #ff416c;
+          }
+          
+          .support-footer {
+            text-align: center;
+            padding: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.5);
+            background: rgba(0, 0, 0, 0.2);
+          }
+          
           @media (max-width: 480px) {
             .signup-container {
               max-width: 100%;
@@ -581,9 +930,157 @@ function Signup() {
             .progress-line {
               max-width: 30px;
             }
+            
+            .customer-support-container {
+              bottom: 20px;
+              right: 20px;
+            }
+            
+            .support-panel {
+              width: 300px;
+              right: -10px;
+            }
+            
+            .contact-item {
+              padding: 12px;
+            }
+            
+            .contact-avatar {
+              width: 45px;
+              height: 45px;
+              font-size: 1.2rem;
+            }
+          }
+          
+          .support-help-text {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.8rem;
+            margin-top: 10px;
+            padding: 0 15px;
+          }
+          
+          .need-help {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            margin-top: 20px;
+            cursor: pointer;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding-bottom:10px;
+          }
+          
+          .need-help:hover {
+            color: #00c6ff;
+          }
+          
+          .help-icon {
+            color: #00c6ff;
           }
         `}
       </style>
+
+      {/* Customer Support Widget */}
+      <div className="customer-support-container">
+        <button 
+          className={`support-button ${showCustomerSupport ? 'active' : 'pulse'}`}
+          onClick={() => setShowCustomerSupport(!showCustomerSupport)}
+          title="Need Help? Contact Support"
+        >
+          <i className="fas fa-headset"></i>
+        </button>
+        
+        {showCustomerSupport && (
+          <div className="support-panel">
+            <button 
+              className="close-panel"
+              onClick={() => setShowCustomerSupport(false)}
+            >
+              <i className="fas fa-times"></i>
+            </button>
+            
+            <div className="support-header">
+              <h3>
+                <i className="fas fa-headset"></i>
+                Customer Support
+              </h3>
+            </div>
+            
+            <div className="support-help-text">
+              Having trouble signing up? Contact our support team
+            </div>
+            
+            <div className="contacts-list">
+              {supportLoading ? (
+                <div className="support-loading">
+                  <i className="fas fa-spinner fa-spin"></i>
+                  <div>Loading contacts...</div>
+                </div>
+              ) : customerSupportData.length > 0 ? (
+                customerSupportData.map((contact, index) => (
+                  <div 
+                    key={contact.id || index}
+                    className="contact-item"
+                    onClick={() => handleContactClick(contact.type, contact.number)}
+                  >
+                    <div className="contact-avatar">
+                      {contact.photo?.[0]?.downloadUrl ? (
+                        <img 
+                          src={contact.photo[0].downloadUrl} 
+                          alt={contact.name} 
+                          onError={(e) => {
+                            e.target.style.display = 'none';
+                            e.target.parentElement.innerHTML = '<i class="fas fa-user-circle"></i>';
+                          }}
+                        />
+                      ) : (
+                        <i className="fas fa-user-circle"></i>
+                      )}
+                    </div>
+                    
+                    <div className="contact-details">
+                      <div className="contact-name">{contact.name}</div>
+                      
+                      <div className="contact-info">
+                        <div 
+                          className="contact-type"
+                          style={{ backgroundColor: getContactColor(contact.type) }}
+                        >
+                          <i className={getContactIcon(contact.type)}></i>
+                          <span>{getContactTypeText(contact.type)}</span>
+                        </div>
+                        <div className="contact-number">{contact.number}</div>
+                      </div>
+                      
+                      <div className="contact-status">
+                        <span className={`status-indicator ${contact.status === 'enable' ? 'status-online' : 'status-offline'}`}></span>
+                        {contact.status === 'enable' ? 'Available now' : 'Currently offline'}
+                      </div>
+                    </div>
+                    
+                    <div className="contact-action">
+                      <i className="fas fa-paper-plane"></i>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <div className="support-empty">
+                  <i className="fas fa-comment-slash"></i>
+                  <div>No support contacts available</div>
+                </div>
+              )}
+            </div>
+            
+            <div className="support-footer">
+              Click on any contact to get immediate support
+            </div>
+          </div>
+        )}
+      </div>
 
       <div className="cinema-signup">
         <div className="signup-container">
@@ -629,6 +1126,12 @@ function Signup() {
                 <i className="fas fa-exclamation-circle"></i> {externalErrorMessage}
               </div>
             )}
+            
+            {/* Need Help Link */}
+            <div className="need-help" onClick={() => setShowCustomerSupport(true)}>
+              <i className="fas fa-question-circle help-icon"></i>
+              Need help signing up? Contact support
+            </div>
             
             {/* Step 1: Account Details */}
             {formStep === 1 && (
@@ -703,6 +1206,10 @@ function Signup() {
                   <div className="perk-item">
                     <span className="perk-icon">⭐</span>
                     <div className="perk-label">Rewards</div>
+                  </div>
+                  <div className="perk-item">
+                    <span className="perk-icon">📞</span>
+                    <div className="perk-label">24/7 Support</div>
                   </div>
                 </div>
                 
@@ -808,6 +1315,10 @@ function Signup() {
                   <div className="benefit-item">
                     <i className="fas fa-check benefit-icon"></i>
                     <span>Loyalty points on every purchase</span>
+                  </div>
+                  <div className="benefit-item">
+                    <i className="fas fa-check benefit-icon"></i>
+                    <span>24/7 customer support</span>
                   </div>
                 </div>
                 

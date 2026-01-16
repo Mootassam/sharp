@@ -1,23 +1,32 @@
-import { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from 'react-router-dom';
 import Vipactions from "src/modules/vip/list/vipListActions";
 import selector from "src/modules/vip/list/vipListSelectors";
 import authSelectors from "src/modules/auth/authSelectors";
-import actions from "src/modules/auth/authActions";
 import listactions from "src/modules/company/list/companyListActions";
 import selectors from "src/modules/company/list/companyListSelectors";
-import { i18n } from "../../../i18n";
-import { Link } from 'react-router-dom'
+import { categories, Category } from "src/view/shared/data/categories";
+import { Film, topFilms } from "src/view/shared/data/topFilms";
+import { featuredPromotions, Promotion } from "src/view/shared/data/promotions";
+import { NowShowingFilm, nowShowingFilms } from "src/view/shared/data/nowShowingFilms";
+import { ComingSoonFilm, comingSoonFilms } from "src/view/shared/data/comingSoonFilms";
 
-function Home() {
+// Import data from separate files
+
+
+// Define types
+type MovieType = 'now' | 'soon';
+
+const Home: React.FC = () => {
   const dispatch = useDispatch();
   const record = useSelector(selector.selectRows);
   const logorecord = useSelector(selectors.selectRows);
   const loadingImage = useSelector(selectors?.selectLoading);
-  const [now, setNow] = useState('now');
-  const [activeCategory, setActiveCategory] = useState('all');
+  const [now, setNow] = useState<MovieType>('now');
+  const [activeCategory, setActiveCategory] = useState<string>('all');
   const currentUser = useSelector(authSelectors.selectCurrentUser);
-  const marqueeRef = useRef(null);
+  const marqueeRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     dispatch(listactions.doFetch());
@@ -27,231 +36,15 @@ function Home() {
   // Marquee text with improved performance
   const marqueeText = "🎬 Special Announcement: Book 2 Tickets, Get 1 Free Popcorn! • Weekend Offer: 40% Off for Students • New Blockbuster 'Deadpool & Wolverine' Coming Soon • Family Bundle: 4 Tickets + Combo Meals = 25% Off • Experience IMAX 3D for Only $5 Extra! 🍿";
 
-  // Movie categories
-  const categories = [
-    { id: 'all', name: 'All', icon: '🎬' },
-    { id: 'action', name: 'Action', icon: '💥' },
-    { id: 'drama', name: 'Drama', icon: '🎭' },
-    { id: 'comedy', name: 'Comedy', icon: '😂' },
-    { id: 'sci-fi', name: 'Sci-Fi', icon: '🚀' },
-    { id: 'fantasy', name: 'Fantasy', icon: '✨' },
-  ];
-
-  // Top Films Horizontal Scroll Section
-  const topFilms = [
-    {
-      id: 1,
-      image: "https://m.media-amazon.com/images/S/pv-target-images/e517ef1200967f6a07bad241d66d0c59a2941e54110fcd7ed4926a9d83cdc636.jpg",
-      rating: 8.5,
-      title: "Dune: Part Two",
-      genre: "Sci-Fi",
-      isTrending: true,
-      category: 'sci-fi'
-    },
-    {
-      id: 2,
-      image: "https://m.media-amazon.com/images/M/MV5BMTc2Mzg0NjA2N15BMl5BanBnXkFtZTcwOTc5NjQzMw@@._V1_FMjpg_UX1000_.jpg",
-      rating: 8.2,
-      title: "The Fall Guy",
-      genre: "Action",
-      isTrending: true,
-      category: 'action'
-    },
-    {
-      id: 3,
-      image: "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQQCT9i0V7Ihj2aX0jyVdwAD0zfGlBexc0UJjvUW7ZgK5n1Fipc",
-      rating: 9.1,
-      title: "Kingdom of the Planet",
-      genre: "Fantasy",
-      isTrending: false,
-      category: 'fantasy'
-    },
-    {
-      id: 4,
-      image: "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQP0OM70mTj4VVIbAqoDaqiNWVcZZyCR_bdxTaAH6bcYT8Yjshb",
-      rating: 8.8,
-      title: "Furiosa",
-      genre: "Action",
-      isTrending: true,
-      category: 'action'
-    },
-    {
-      id: 5,
-      image: "https://contentserver.com.au/assets/491602_p11214341_p_v8_ap.jpg",
-      rating: 7.9,
-      title: "Ghostbusters",
-      genre: "Comedy",
-      isTrending: false,
-      category: 'comedy'
-    },
-    {
-      id: 6,
-      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVcsf2bpo5cKHGk4HRob4v6M0IFiyZdPuRGXUvxHiHhDdAOYh7",
-      rating: 8.4,
-      title: "Kung Fu Panda 4",
-      genre: "Animation",
-      isTrending: false,
-      category: 'comedy'
-    },
-    {
-      id: 7,
-      image: "https://m.media-amazon.com/images/M/MV5BODI0YjNhNjUtYzE2MC00ZDI1LWE3ZjQtODU1MmI1ZmU2YzM5XkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_FMjpg_UX1000_.jpg",
-      rating: 8.7,
-      title: "Oppenheimer",
-      genre: "Drama",
-      isTrending: true,
-      category: 'drama'
-    },
-    {
-      id: 8,
-      image: "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQKYT4J1T_y_0QukK4G_pnX3x8vS5Nt1l1MJCg24Be-FSL07D-y",
-      rating: 7.8,
-      title: "The Batman",
-      genre: "Action/Drama",
-      isTrending: false,
-      category: 'drama'
-    }
-  ];
-
-  const nowShowingFilms = [
-    {
-      id: 1,
-      image: "https://m.media-amazon.com/images/S/pv-target-images/e517ef1200967f6a07bad241d66d0c59a2941e54110fcd7ed4926a9d83cdc636.jpg",
-      rating: 7.5,
-      title: "Dune: Part Two",
-      genre: "Sci-Fi/Action",
-      duration: "2h 46m",
-      imax: true,
-      category: 'sci-fi'
-    },
-    {
-      id: 2,
-      image: "https://m.media-amazon.com/images/M/MV5BMTc2Mzg0NjA2N15BMl5BanBnXkFtZTcwOTc5NjQzMw@@._V1_FMjpg_UX1000_.jpg",
-      rating: 8.2,
-      title: "The Fall Guy",
-      genre: "Action/Comedy",
-      duration: "2h 5m",
-      imax: false,
-      category: 'action'
-    },
-    {
-      id: 3,
-      image: "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQQCT9i0V7Ihj2aX0jyVdwAD0zfGlBexc0UJjvUW7ZgK5n1Fipc",
-      rating: 9.1,
-      title: "Kingdom of the Planet",
-      genre: "Fantasy/Adventure",
-      duration: "2h 25m",
-      imax: true,
-      category: 'fantasy'
-    },
-    {
-      id: 4,
-      image: "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQP0OM70mTj4VVIbAqoDaqiNWVcZZyCR_bdxTaAH6bcYT8Yjshb",
-      rating: 6.8,
-      title: "Furiosa: A Mad Max Saga",
-      genre: "Action/Adventure",
-      duration: "2h 28m",
-      imax: true,
-      category: 'action'
-    },
-    {
-      id: 5,
-      image: "https://contentserver.com.au/assets/491602_p11214341_p_v8_ap.jpg",
-      rating: 7.3,
-      title: "Ghostbusters: Frozen Empire",
-      genre: "Comedy/Fantasy",
-      duration: "1h 55m",
-      imax: false,
-      category: 'comedy'
-    },
-    {
-      id: 6,
-      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVcsf2bpo5cKHGk4HRob4v6M0IFiyZdPuRGXUvxHiHhDdAOYh7",
-      rating: 8.0,
-      title: "Kung Fu Panda 4",
-      genre: "Animation/Comedy",
-      duration: "1h 34m",
-      imax: false,
-      category: 'comedy'
-    }
-  ];
-
-  const comingSoonFilms = [
-    {
-      id: 1,
-      image: "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcS7BVyY3gGvbkvGInfa6HMVTlHuaIC2WgSfWPZM6kb-YlWB8Vl0",
-      rating: 9.0,
-      title: "Deadpool & Wolverine",
-      genre: "Action/Comedy",
-      release: "July 26",
-      category: 'action'
-    },
-    {
-      id: 2,
-      image: "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSR6pgVhfkZKNEgcYj1W480V2rFeF1Yov8M5O2b0CSC7L4Mdgkj",
-      rating: 6.8,
-      title: "Moana 2",
-      genre: "Animation/Adventure",
-      release: "Nov 27",
-      category: 'fantasy'
-    },
-    {
-      id: 3,
-      image: "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQNjatfQ7yNx3Ejq1snXteHf9TeOUmaaWjxlXnssAI6y2IE138x",
-      rating: 9.3,
-      title: "Joker: Folie à Deux",
-      genre: "Crime/Drama",
-      release: "Oct 4",
-      category: 'drama'
-    },
-    {
-      id: 4,
-      image: "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSAfbQzvGKy0oUKX3tKXOKirveHpqNU8fUxWNq6ghdDDLxeYxfw",
-      rating: 6.9,
-      title: "Gladiator II",
-      genre: "Action/Drama",
-      release: "Nov 22",
-      category: 'drama'
-    }
-  ];
-
-  // Updated featuredPromotions array - replace the existing one
-  // Updated featuredPromotions array in your Market page
-  const featuredPromotions = [
-    {
-      title: "Experiences",
-      icon: "🎬",
-      desc: "IMAX, 4DX & VIP Cinemas",
-      link: "/experience" // NEW: Link to Experience page
-    },
-    {
-      title: "Membership",
-      icon: "👑",
-      desc: "Loyalty Programs & Perks",
-      link: "/membership" // NEW: Link to Membership page
-    },
-    {
-      title: "Offers & Gifts",
-      icon: "🎁",
-      desc: "Special Deals & Gift Cards",
-      link: "/gifts" // NEW: Link to Gifts page
-    },
-    {
-      title: "Family",
-      icon: "👨‍👩‍👧‍👦",
-      desc: "Family Packages & Kids Shows",
-      link: "/family" // NEW: Link to Family page
-    }
-  ];
-
   // Filter top films based on selected category
-  const filteredTopFilms = activeCategory === 'all'
+  const filteredTopFilms: Film[] = activeCategory === 'all'
     ? topFilms
     : topFilms.filter(film => film.category === activeCategory);
 
   // Filter movies based on category
-  const filteredMovies = (now === 'now' ? nowShowingFilms : comingSoonFilms)
-    .filter(movie => activeCategory === 'all' || movie.category === activeCategory);
+  const filteredMovies: (NowShowingFilm | ComingSoonFilm)[] = (
+    now === 'now' ? nowShowingFilms : comingSoonFilms
+  ).filter(movie => activeCategory === 'all' || movie.category === activeCategory);
 
   return (
     <>
@@ -829,22 +622,21 @@ function Home() {
           }
 
           /* Add this to your Market page CSS */
-
-.promotion-card-link {
-  text-decoration: none;
-  display: block;
-  color: inherit;
-}
-
-.promotion-card-link:hover .promotion-card {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(0, 104, 200, 0.2);
-}
-
-/* Ensure the Link doesn't break the grid layout */
-.promotion-card-link .promotion-card {
-  height: 100%;
-}
+          .promotion-card-link {
+            text-decoration: none;
+            display: block;
+            color: inherit;
+          }
+          
+          .promotion-card-link:hover .promotion-card {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 104, 200, 0.2);
+          }
+          
+          /* Ensure the Link doesn't break the grid layout */
+          .promotion-card-link .promotion-card {
+            height: 100%;
+          }
         `}
       </style>
 
@@ -885,7 +677,7 @@ function Home() {
 
           {/* Category Filter - Now Filters Trending Films */}
           <div className="category-filter">
-            {categories.map(category => (
+            {categories.map((category: Category) => (
               <button
                 key={category.id}
                 className={`category-btn ${activeCategory === category.id ? 'active' : ''}`}
@@ -904,13 +696,11 @@ function Home() {
                 <i className="fas fa-fire"></i>
                 Trending Now
               </h3>
-              <div className="view-all">
-                View All <i className="fas fa-chevron-right"></i>
-              </div>
+          
             </div>
             <div className="top-films-scroll">
               {filteredTopFilms.length > 0 ? (
-                filteredTopFilms.map((film) => (
+                filteredTopFilms.map((film: Film) => (
                   <div key={film.id} className="top-film-card">
                     {film.isTrending && (
                       <div className="trending-badge">🔥 Trending</div>
@@ -920,7 +710,7 @@ function Home() {
                         src={film.image}
                         alt={film.title}
                         className="top-film-poster"
-                          loading="lazy"
+                        loading="lazy"
                       />
                       <div className="top-film-rating">
                         <i className="fas fa-star"></i>
@@ -949,12 +739,10 @@ function Home() {
                 <i className="fas fa-gift"></i>
                 Exclusive Offers
               </h3>
-              <div className="view-all">
-                See All <i className="fas fa-chevron-right"></i>
-              </div>
+             
             </div>
             <div className="promotions-grid">
-              {featuredPromotions.map((promo, index) => (
+              {featuredPromotions.map((promo: Promotion, index: number) => (
                 <Link
                   key={index}
                   to={promo.link}
@@ -998,18 +786,18 @@ function Home() {
                       src={movie.image}
                       alt={movie.title}
                       className="movie-poster"
-                        loading="lazy"
+                      loading="lazy"
                     />
                     <div className="movie-rating">
                       <i className="fas fa-star"></i>
                       {movie.rating}
                     </div>
-                    {movie.imax && now === 'now' && (
+                    {('imax' in movie && movie.imax && now === 'now') && (
                       <div className="imax-badge">IMAX</div>
                     )}
                     {now === 'soon' && (
                       <div className="coming-soon-badge">
-                        {movie.release}
+                        {('release' in movie) ? movie.release : ''}
                       </div>
                     )}
                   </div>
@@ -1017,7 +805,7 @@ function Home() {
                     <div className="movie-title">{movie.title}</div>
                     <div className="movie-meta">
                       {movie.genre}
-                      {now === 'now' && ` • ${movie.duration}`}
+                      {now === 'now' && 'duration' in movie && ` • ${movie.duration}`}
                     </div>
                     <button className="book-btn">
                       {now === 'now' ? (
@@ -1045,27 +833,10 @@ function Home() {
         </div>
 
         {/* Bottom Navigation */}
-        <div className="bottom-nav">
-          <div className="nav-item active">
-            <i className="fas fa-home"></i>
-            <span>Home</span>
-          </div>
-          <div className="nav-item">
-            <i className="fas fa-film"></i>
-            <span>Movies</span>
-          </div>
-          <div className="nav-item">
-            <i className="fas fa-ticket-alt"></i>
-            <span>Tickets</span>
-          </div>
-          <div className="nav-item">
-            <i className="fas fa-user"></i>
-            <span>Profile</span>
-          </div>
-        </div>
+     
       </div>
     </>
   );
-}
+};
 
-export default Home
+export default Home;

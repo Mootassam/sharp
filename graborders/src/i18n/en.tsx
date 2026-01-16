@@ -137,7 +137,7 @@ const en = {
 
   cs: {
     cs: "Customer services",
-    note: "if you have any questions or encouter issues, please email us or chat with our online customer support team.",
+    note: "if you have any questions or encouter issues, please chat with our online customer support team.",
     contactnow: "Contact Now"
   },
   transaction: {

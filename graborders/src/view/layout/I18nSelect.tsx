@@ -365,9 +365,8 @@ function I18nSelect({ onClose }) {
           /* Responsive */
           @media (max-width: 480px) {
             .i18n-container {
-              width: 95%;
+              width: 100%;
               padding: 16px;
-              max-height: 80vh;
             }
             
             .i18n-header-container {

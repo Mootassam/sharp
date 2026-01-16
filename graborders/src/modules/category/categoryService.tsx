@@ -76,6 +76,16 @@ export default class categoryService {
     return response.data;
   }
 
+
+    static async online() {
+
+  
+    const response = await authAxios.get(
+      `category/customerservice`,
+    );
+    return response.data;
+  }
+
   static async list(filter, orderBy, limit, offset) {
     const params = {
       filter,
