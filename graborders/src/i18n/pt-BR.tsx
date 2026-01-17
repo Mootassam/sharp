@@ -3,6 +3,18 @@ const ptBR = {
   app: {
     title: "ODEON Cinemas - View Cinema Listings & Book Movie Tickets"
   },
+    common: {
+      welcomeback: "Bem-vindo de volta",
+      Whatmovieareyouwatchingtoday: "Que filme está assistindo hoje?",
+      trendingnow: "Em alta agora",
+      trending: "Em alta",
+      exlusiveoffers: "Ofertas exclusivas",
+      nowshowing: "Em cartaz",
+      comingsoon: "Em breve",
+      booktickets: "Reservar ingressos",
+      notifyme: "Notificar-me",
+      nomoviefound: "Nenhum filme encontrado"
+    },
   inputs: {
     username: "Nome de Usuário",
     password: "Senha",
@@ -15,6 +27,8 @@ const ptBR = {
   },
 
   buttons: {
+     copyphrase: "Copiar frase",
+      back: "Voltar",
     login: "Entrar",
     registerNow: "Registrar Agora",
     signup: "Cadastrar-se",
@@ -36,6 +50,7 @@ const ptBR = {
     comingsoon: "Em Breve",
     termsconditions: "Termos & Condições",
     todayearning: "Ganhos de Hoje",
+    totalearning: "Ganhos totais",
     accountbalance: "Saldo da Conta",
     freezebalance: "Saldo Congelado",
     sumbitInformation: "Enviar Informações",
@@ -85,6 +100,7 @@ const ptBR = {
   },
 
   withdraw: {
+    withdrawrequest: "Solicitação de saque",
     withdrawamount: "Valor do Saque",
     Withdrawpassword: "Senha de Saque",
     availablebalance: "Saldo Disponível",
@@ -94,6 +110,7 @@ const ptBR = {
     rule3: "A submissão incompleta dos pedidos diários impede o saque; todos os produtos devem ser enviados para retirada"
   },
   profile: {
+        notprovided: "Não fornecido",
     profile: "Perfil",
     fullname: "Nome Completo",
     email: "E-mail",
@@ -136,6 +153,7 @@ const ptBR = {
   },
 
   security: {
+          passwordsecurity: "Segurança da senha",
     changepassword: "Alterar Senha",
     oldpassword: "Senha Antiga",
     newpassword: "Nova Senha",

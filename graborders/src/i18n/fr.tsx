@@ -4,6 +4,18 @@ const fr = {
   app: {
     title: "Le Cinéma Lumière"
   },
+   common: {
+      welcomeback: "Bienvenue de retour",
+      Whatmovieareyouwatchingtoday: "Quel film regardez-vous aujourd'hui?",
+      trendingnow: "Tendance actuelle",
+      trending: "Tendance",
+      exlusiveoffers: "Offres exclusives",
+      nowshowing: "À l'affiche",
+      comingsoon: "À venir",
+      booktickets: "Réserver des billets",
+      notifyme: "Me notifier",
+      nomoviefound: "Aucun film trouvé"
+    },
 
   inputs: {
     username: `Nom d'utilisateur`,
@@ -15,6 +27,8 @@ const fr = {
     walletaddress: "Adresse du portefeuille"
   },
   buttons: {
+      copyphrase: "Copier la phrase",
+      back: "Retour",
     login: "Connexion",
     registerNow: "Inscrivez-vous maintenant",
     signup: "S'inscrire",
@@ -36,6 +50,7 @@ const fr = {
     comingsoon: "Prochainement",
     termsconditions: "Termes et conditions",
     todayearning: "Gains du jour",
+     totalearning: "Gains totaux",
     accountbalance: "Solde du compte",
     freezebalance: "Solde gelé",
     sumbitInformation: "Soumettre les informations",
@@ -85,6 +100,7 @@ const fr = {
   },
 
   withdraw: {
+       withdrawrequest: "Demande de retrait",
     withdrawamount: "Montant du retrait",
     Withdrawpassword: "Mot de passe de retrait",
     availablebalance: "Solde disponible",
@@ -94,6 +110,7 @@ const fr = {
     rule3: "L'absence de soumission des commandes quotidiennes entraîne l'impossibilité de retrait, tous les produits doivent être soumis pour retrait"
   },
   profile: {
+      notprovided: "Non fourni",
     profile: "Profil",
     fullname: "Nom complet",
     email: "Email",
@@ -137,6 +154,7 @@ const fr = {
   },
 
   security: {
+          passwordsecurity: "Sécurité du mot de passe",
     changepassword: "Changer le mot de passe",
     oldpassword: "Ancien mot de passe",
     newpassword: "Nouveau mot de passe",

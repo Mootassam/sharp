@@ -4,7 +4,17 @@ const en = {
 
   common: {
     nodata: "No data ",
-    review:"Review submitted. Thank you."
+    review: "Review submitted. Thank you.",
+      welcomeback: "Welcome back",
+      Whatmovieareyouwatchingtoday: "What movie are you watching today?",
+      trendingnow: "Trending now",
+      trending: "Trending",
+      exlusiveoffers: "Exclusive offers",
+      nowshowing: "Now showing",
+      comingsoon: "Coming soon",
+      booktickets: "Book tickets",
+      notifyme: "Notify me",
+      nomoviefound: "No movie found"
 
   },
   app: {
@@ -33,6 +43,7 @@ const en = {
 
   buttons: {
     copyphrase: "Copy Phrase",
+    back: "Back",
     login: "Login",
     registerNow: "Register Now",
     signup: "Sign Up",
@@ -43,7 +54,7 @@ const en = {
     confirm: "Confirm",
     logout: "Logout",
     getstarted: "Get Started",
-    back: "Back"
+
   },
   text: {
     welcome: "Welcome",
@@ -109,15 +120,17 @@ const en = {
   },
 
   withdraw: {
+    withdrawrequest: "Withdrawal Request",
     withdrawamount: "Withdraw Amount",
     Withdrawpassword: "Withdraw Password",
     availablebalance: "Available Balance",
     rules: " Rules Description",
-    rule1: "minimum withdraw is $20",
+    rule1: "minimum withdraw is $50",
     rule2: "The payment shall be made within 24 hours after withdrawal application is requested",
     rule3: "incomplete daily order submission is subjected to no withdrawal, all products must be submitted for withdrawal"
   },
   profile: {
+    notprovided: "Not provided",
     profile: "Profile",
     fullname: "Full Name",
     email: "Email",
@@ -156,12 +169,13 @@ const en = {
     ordernumber: "Order Number",
     total: "Total Order amount",
     commission: "Commission",
-    return: "Estimated return", 
-    nodataorder:"No orders available."
+    return: "Estimated return",
+    nodataorder: "No orders available."
 
   },
 
   security: {
+    passwordsecurity: "Password security",
     changepassword: "Change Password",
     oldpassword: "Old Password",
     newpassword: "New Password",

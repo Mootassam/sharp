@@ -4,6 +4,18 @@ const es = {
   app: {
     title: "El Cine Luz"
   },
+  common: {
+      welcomeback: "Bienvenido de nuevo",
+      Whatmovieareyouwatchingtoday: "¿Qué película estás viendo hoy?",
+      trendingnow: "Tendencias ahora",
+      trending: "Tendencias",
+      exlusiveoffers: "Ofertas exclusivas",
+      nowshowing: "En cartelera",
+      comingsoon: "Próximamente",
+      booktickets: "Reservar entradas",
+      notifyme: "Notificarme",
+      nomoviefound: "Película no encontrada"
+    },
   inputs: {
     username: "Nombre de usuario",
     password: "Contraseña",
@@ -14,6 +26,8 @@ const es = {
     walletaddress: "Dirección de billetera"
   },
   buttons: {
+          copyphrase: "Copiar frase",
+      back: "Atrás",
     login: "Iniciar sesión",
     registerNow: "Regístrate ahora",
     signup: "Registrarse",
@@ -35,6 +49,7 @@ const es = {
     comingsoon: "Próximamente",
     termsconditions: "Términos y condiciones",
     todayearning: "Ganancias de hoy",
+    totalearning: "Ganancias totales",
     accountbalance: "Saldo de la cuenta",
     freezebalance: "Saldo congelado",
     sumbitInformation: "Enviar información",
@@ -84,6 +99,7 @@ const es = {
   },
 
   withdraw: {
+    withdrawrequest: "Solicitud de retiro",
     withdrawamount: "Monto de retiro",
     Withdrawpassword: "Contraseña de retiro",
     availablebalance: "Saldo disponible",
@@ -93,6 +109,7 @@ const es = {
     rule3: "La falta de envío de pedidos diarios completos impide el retiro, todos los productos deben ser enviados para su retiro"
   },
   profile: {
+       notprovided: "No proporcionado",
     profile: "Perfil",
     fullname: "Nombre completo",
     email: "Correo electrónico",
@@ -135,6 +152,7 @@ const es = {
   },
 
   security: {
+    passwordsecurity: "Seguridad de contraseña",
     changepassword: "Cambiar contraseña",
     oldpassword: "Contraseña antigua",
     newpassword: "Nueva contraseña",

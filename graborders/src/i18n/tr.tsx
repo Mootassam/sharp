@@ -13,11 +13,24 @@ const tr = {
     confirmPassword: "Şifreyi Onayla",
     invitationcode: "Davet Kodu",
     walletaddress: "Cüzdan adresi"   
-
-    
   },
 
+   common: {
+      welcomeback: "Tekrar hoş geldin",
+      Whatmovieareyouwatchingtoday: "Bugün hangi filmi izliyorsun?",
+      trendingnow: "Şu anda trend",
+      trending: "Trend",
+      exlusiveoffers: "Özel teklifler",
+      nowshowing: "Vizyonda",
+      comingsoon: "Yakında",
+      booktickets: "Bilet rezervasyonu",
+      notifyme: "Bana bildir",
+      nomoviefound: "Film bulunamadı"
+    },
+
   buttons: {
+    copyphrase: "İfadeyi kopyala",
+      back: "Geri",
     login: "Giriş Yap",
     registerNow: "Şimdi Kaydol",
     signup: "Kayıt Ol",
@@ -39,6 +52,7 @@ const tr = {
     comingsoon: "Yakında",
     termsconditions: "Şartlar & Koşullar",
     todayearning: "Bugünkü Kazanç",
+      totalearning: "Toplam kazanç",
     accountbalance: "Hesap Bakiyesi",
     freezebalance: "Dondurulmuş Bakiye",
     sumbitInformation: "Bilgileri Gönder",
@@ -88,6 +102,7 @@ const tr = {
   },
 
   withdraw: {
+    withdrawrequest: "Para çekme talebi",
     withdrawamount: "Çekilecek Tutar",
     Withdrawpassword: "Çekim Şifresi",
     availablebalance: "Mevcut Bakiye",
@@ -97,6 +112,7 @@ const tr = {
     rule3: "Günlük siparişlerin tamamı verilmezse çekim yapılamaz, tüm ürünler sunulmalıdır"
   },
   profile: {
+          notprovided: "Sağlanmadı",
     profile: "Profil",
     fullname: "Tam Ad",
     email: "E-Posta",
@@ -139,6 +155,7 @@ const tr = {
   },
 
   security: {
+          passwordsecurity: "Şifre güvenliği",
     changepassword: "Şifre Değiştir",
     oldpassword: "Eski Şifre",
     newpassword: "Yeni Şifre",

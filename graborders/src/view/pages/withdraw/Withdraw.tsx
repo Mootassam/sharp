@@ -15,7 +15,7 @@ import { useHistory } from "react-router-dom"; // Add this import
 const schema = yup.object().shape({
   amount: yupFormSchemas.integer(i18n("withdraw.withdrawamount"), {
     required: true,
-    min: 20,
+    min: 50,
   }),
   withdrawPassword: yupFormSchemas.string(i18n("withdraw.Withdrawpassword"), {
     required: true,

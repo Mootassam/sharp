@@ -135,7 +135,7 @@ const Grappage = () => {
           
           /* Task Content */
           .task-content {
-            padding: 16px 18px 20px;
+            padding: 16px 18px 90px;
           }
           
           /* Task Stats - Compact */
@@ -560,7 +560,7 @@ const Grappage = () => {
           /* Responsive */
           @media (max-width: 430px) {
             .task-content {
-              padding: 14px 16px 20px;
+              padding: 14px 16px 90px;
             }
             
             .task-stats {

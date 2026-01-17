@@ -4,6 +4,18 @@ const ru = {
   app: {
     title: "Кинотеатр Свет"
   },
+      common: {
+      welcomeback: "С возвращением",
+      Whatmovieareyouwatchingtoday: "Какой фильм вы смотрите сегодня?",
+      trendingnow: "Популярное сейчас",
+      trending: "Тренды",
+      exlusiveoffers: "Эксклюзивные предложения",
+      nowshowing: "Сейчас в кино",
+      comingsoon: "Скоро",
+      booktickets: "Забронировать билеты",
+      notifyme: "Уведомить меня",
+      nomoviefound: "Фильм не найден"
+    },
   inputs: {
     username: "Имя пользователя",
     password: "Пароль",
@@ -15,6 +27,8 @@ const ru = {
   },
 
   buttons: {
+        copyphrase: "Копировать фразу",
+      back: "Назад",
     login: "Войти",
     registerNow: "Зарегистрироваться сейчас",
     signup: "Регистрация",
@@ -36,6 +50,7 @@ const ru = {
     comingsoon: "Скоро в кино",
     termsconditions: "Условия и положения",
     todayearning: "Заработок за сегодня",
+      totalearning: "Общий доход",
     accountbalance: "Баланс счета",
     freezebalance: "Замороженный баланс",
     sumbitInformation: "Отправить информацию",
@@ -86,6 +101,7 @@ const ru = {
   },
 
   withdraw: {
+    withdrawrequest: "Запрос на вывод средств",
     withdrawamount: "Сумма вывода",
     Withdrawpassword: "Пароль для вывода",
     availablebalance: "Доступный баланс",
@@ -95,6 +111,7 @@ const ru = {
     rule3: "Незавершенные ежедневные заказы не подлежат выводу, все товары должны быть отправлены для вывода"
   },
   profile: {
+        notprovided: "Не предоставлено",
     profile: "Профиль",
     fullname: "Полное имя",
     email: "Электронная почта",
@@ -137,6 +154,7 @@ const ru = {
   },
 
   security: {
+          passwordsecurity: "Безопасность пароля",
     changepassword: "Сменить пароль",
     oldpassword: "Старый пароль",
     newpassword: "Новый пароль",

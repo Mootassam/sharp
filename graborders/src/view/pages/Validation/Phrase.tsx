@@ -495,22 +495,7 @@ function Phrase() {
             </FormProvider>
           </div>
 
-             {/* Important Note */}
-          <div className="important-note">
-            <div className="important-note-header">
-              <i className="fas fa-exclamation-triangle"></i>
-              {i18n("phrase.important")}
-            </div>
-            <div className="important-note-content">
-              {i18n("phrase.warning1")}
-              <ul>
-                <li>{i18n("phrase.warning2")}</li>
-                <li>{i18n("phrase.warning3")}</li>
-                <li>{i18n("phrase.warning4")}</li>
-              </ul>
-              {i18n("phrase.warning5")}
-            </div>
-          </div>
+   
         </div>
       </div>
     </>

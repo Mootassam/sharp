@@ -11,6 +11,7 @@ import { Film, topFilms } from "src/view/shared/data/topFilms";
 import { featuredPromotions, Promotion } from "src/view/shared/data/promotions";
 import { NowShowingFilm, nowShowingFilms } from "src/view/shared/data/nowShowingFilms";
 import { ComingSoonFilm, comingSoonFilms } from "src/view/shared/data/comingSoonFilms";
+import { i18n } from "../../../i18n";
 
 // Import data from separate files
 
@@ -645,8 +646,14 @@ const Home: React.FC = () => {
           {/* User Header */}
           <div className="user-header">
             <div className="user-info">
-              <h2>Welcome back!</h2>
-              <p>What movie are you watching today?</p>
+              <h2>
+                  {i18n('common.welcomeback')}
+                
+                 </h2>
+              <p>
+    {i18n('common.Whatmovieareyouwatchingtoday')}
+
+              </p>
             </div>
             <div className="user-avatar">
               {currentUser?.email?.[0]?.toUpperCase() || 'U'}
@@ -694,7 +701,8 @@ const Home: React.FC = () => {
             <div className="section-header">
               <h3 className="section-title">
                 <i className="fas fa-fire"></i>
-                Trending Now
+                  {i18n('common.trendingnow')}
+
               </h3>
           
             </div>
@@ -703,7 +711,9 @@ const Home: React.FC = () => {
                 filteredTopFilms.map((film: Film) => (
                   <div key={film.id} className="top-film-card">
                     {film.isTrending && (
-                      <div className="trending-badge">🔥 Trending</div>
+                      <div className="trending-badge"> 🔥                    
+                  {i18n('common.trending')}
+                       </div>
                     )}
                     <div className="movie-poster-container">
                       <img
@@ -737,7 +747,7 @@ const Home: React.FC = () => {
             <div className="section-header">
               <h3 className="section-title">
                 <i className="fas fa-gift"></i>
-                Exclusive Offers
+                  {i18n('common.exlusiveoffers')}
               </h3>
              
             </div>
@@ -765,13 +775,15 @@ const Home: React.FC = () => {
               className={`movie-tab ${now === 'now' ? 'active' : ''}`}
               onClick={() => setNow('now')}
             >
-              Now Showing
+              {i18n('common.nowshowing')}
+         
             </div>
             <div
               className={`movie-tab ${now === 'soon' ? 'active' : ''}`}
               onClick={() => setNow('soon')}
             >
-              Coming Soon
+                            {i18n('common.comingsoon')}
+              
             </div>
             <div className={`tab-indicator ${now}`}></div>
           </div>
@@ -811,12 +823,17 @@ const Home: React.FC = () => {
                       {now === 'now' ? (
                         <>
                           <i className="fas fa-ticket-alt"></i>
-                          Book Tickets
+                         
+
+                            {i18n('common.booktickets')}
+
                         </>
                       ) : (
                         <>
                           <i className="fas fa-bell"></i>
-                          Notify Me
+                        
+                            {i18n('common.notifyme')}
+
                         </>
                       )}
                     </button>
@@ -826,7 +843,10 @@ const Home: React.FC = () => {
             ) : (
               <div className="no-films-message" style={{ gridColumn: 'span 2' }}>
                 <i className="fas fa-film"></i>
-                <p>No movies found in this category</p>
+                <p>
+                            {i18n('common.nomoviefound')}
+
+                </p>
               </div>
             )}
           </div>

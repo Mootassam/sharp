@@ -4,6 +4,18 @@ const de = {
   app: {
     title: "Das Licht Kino"
   },
+      common: {
+      welcomeback: "Willkommen zurück",
+      Whatmovieareyouwatchingtoday: "Welchen Film schaust du heute?",
+      trendingnow: "Jetzt im Trend",
+      trending: "Trends",
+      exlusiveoffers: "Exklusive Angebote",
+      nowshowing: "Jetzt im Kino",
+      comingsoon: "Demnächst",
+      booktickets: "Tickets buchen",
+      notifyme: "Benachrichtige mich",
+      nomoviefound: "Kein Film gefunden"
+    },
   inputs: {
     username: "Benutzername",
     password: "Passwort",
@@ -15,6 +27,8 @@ const de = {
   },
 
   buttons: {
+     copyphrase: "Phrase kopieren",
+      back: "Zurück",
     login: "Anmelden",
     registerNow: "Jetzt registrieren",
     signup: "Registrieren",
@@ -36,6 +50,7 @@ const de = {
     comingsoon: "Demnächst",
     termsconditions: "Allgemeine Geschäftsbedingungen",
     todayearning: "Heutiges Einkommen",
+       totalearning: "Gesamteinnahmen",
     accountbalance: "Kontostand",
     freezebalance: "Eingefrorenes Guthaben",
     sumbitInformation: "Informationen übermitteln",
@@ -85,6 +100,7 @@ const de = {
   },
 
   withdraw: {
+    withdrawrequest: "Auszahlungsanfrage",
     withdrawamount: "Auszahlungsbetrag",
     Withdrawpassword: "Auszahlungs-Passwort",
     availablebalance: "Verfügbares Guthaben",
@@ -94,6 +110,7 @@ const de = {
     rule3: "Unvollständige tägliche Bestellungen können nicht ausgezahlt werden, alle Produkte müssen eingereicht werden"
   },
   profile: {
+     notprovided: "Nicht angegeben",
     profile: "Profil",
     fullname: "Vollständiger Name",
     email: "E-Mail",
@@ -136,6 +153,7 @@ const de = {
   },
 
   security: {
+          passwordsecurity: "Passwortsicherheit",
     changepassword: "Passwort ändern",
     oldpassword: "Altes Passwort",
     newpassword: "Neues Passwort",
