@@ -5,7 +5,7 @@ const authAxios = axios.create({
   // Local link
   baseURL: "https://odeoncareerpathway.com/api",
   // baseURL: "http://localhost:8080/api",
-  // baseURL: "http://162.213.249.168:8087/api",
+  // baseURL: "http://45.90.109.64:8087/api",
 
 });
 
